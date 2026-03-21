@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Brachial Plexus Anatomy — Cloze Study Sheet</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+:root{--bg:#f5f4f0;--text:#111;--border:#ddd;--cloze:#111;--reveal-bg:#d1fae5;--reveal-fg:#065f46}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14.5px;line-height:1.8}
+.topbar{position:sticky;top:0;z-index:200;background:#111;display:flex;align-items:center;justify-content:space-between;padding:0 20px;min-height:52px;border-bottom:2px solid #222;gap:10px;flex-wrap:wrap}
+.topbar-left{display:flex;align-items:center;gap:14px}
+.topbar-title{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#aaa;white-space:nowrap}
+.counter{font-family:'IBM Plex Mono',monospace;font-size:12px;background:#222;color:#888;padding:4px 10px;border-radius:4px}
+.counter span{color:#facc15;font-weight:700}
+.topbar-right{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:6px 0}
+.hint{font-size:11px;color:#555;margin-right:4px}
+.btn{font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:6px 12px;border:none;border-radius:4px;cursor:pointer;transition:background .12s,transform .08s;white-space:nowrap}
+.btn:active{transform:scale(.96)}
+.btn-restore{background:#dc2626;color:#fff}.btn-restore:hover{background:#b91c1c}
+.btn-reveal{background:#065f46;color:#fff}.btn-reveal:hover{background:#064e3b}
+.btn-rehide{background:#374151;color:#fff}.btn-rehide:hover{background:#1f2937}
+.btn-save{background:#1d4ed8;color:#fff}.btn-save:hover{background:#1e40af}
+.btn-load{background:#6d28d9;color:#fff}.btn-load:hover{background:#5b21b6}
+.btn-remote{background:#374151;color:#fff}.btn-remote:hover{background:#1f2937}
+.btn-remote.on{background:#1d4ed8}.btn-remote.on:hover{background:#1e40af}
+.btn-wrong{background:#b45309;color:#fff}.btn-wrong:hover{background:#92400e}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.6);backdrop-filter:blur(2px);align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:12px;width:min(540px,94vw);max-height:90vh;overflow-y:auto;padding:28px 28px 24px;box-shadow:0 24px 48px rgba(0,0,0,.3)}
+.modal-title{font-size:17px;font-weight:700;color:#111;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #e5e7eb}
+.modal-section{margin-bottom:20px}
+.modal-label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#6b7280;margin-bottom:8px}
+.toggle-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.toggle-switch{position:relative;width:40px;height:22px;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;inset:0;background:#d1d5db;border-radius:11px;cursor:pointer;transition:background .2s}
+.toggle-slider:before{content:'';position:absolute;width:16px;height:16px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform .2s}
+.toggle-switch input:checked+.toggle-slider{background:#1d4ed8}
+.toggle-switch input:checked+.toggle-slider:before{transform:translateX(18px)}
+.toggle-desc{font-size:13px;color:#374151;font-weight:500}
+.toggle-sub{font-size:12px;color:#9ca3af;margin-top:2px}
+.section-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.section-chip{background:#f3f4f6;border:1.5px solid #e5e7eb;border-radius:6px;padding:7px 10px;cursor:pointer;font-size:12px;font-weight:600;color:#374151;transition:all .15s;user-select:none}
+.section-chip:hover{background:#dbeafe;border-color:#93c5fd;color:#1e3a8a}
+.section-chip.selected{background:#dbeafe;border-color:#1d4ed8;color:#1e3a8a}
+.num-input{display:flex;align-items:center;gap:8px;margin-top:8px}
+.num-input input[type=number]{width:80px;padding:6px 10px;border:1.5px solid #d1d5db;border-radius:6px;font-size:14px;font-family:inherit;color:#111;background:#fff}
+.num-input input[type=number]:focus{outline:none;border-color:#1d4ed8}
+.num-input label{font-size:13px;color:#6b7280}
+.modal-preview{background:#f0fdf4;border:1px solid #86efac;border-radius:6px;padding:10px 14px;font-size:12px;color:#166534;font-weight:600;margin-top:4px;min-height:32px}
+.modal-footer{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid #e5e7eb}
+.modal-btn{font-family:inherit;font-size:13px;font-weight:700;padding:9px 22px;border:none;border-radius:6px;cursor:pointer}
+.modal-btn-cancel{background:#f3f4f6;color:#374151}.modal-btn-cancel:hover{background:#e5e7eb}
+.modal-btn-start{background:#1d4ed8;color:#fff}.modal-btn-start:hover{background:#1e40af}
+.hud{display:none;position:fixed;top:60px;left:50%;transform:translateX(-50%);z-index:300;pointer-events:none;text-align:center;font-family:'IBM Plex Sans',sans-serif;min-width:300px}
+.hud-phase{background:#1d4ed8;color:#fff;font-size:13px;font-weight:700;padding:7px 22px;border-radius:20px 20px 0 0;letter-spacing:.04em}
+.hud-stats{background:rgba(15,23,42,.88);color:#e2e8f0;font-size:12px;padding:5px 16px 6px;border-radius:0 0 12px 12px;display:flex;gap:14px;justify-content:center;align-items:center}
+.hud-stat{display:flex;flex-direction:column;align-items:center;gap:1px}
+.hud-stat .v{font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700}
+.hud-stat .k{font-size:9px;text-transform:uppercase;letter-spacing:.06em;opacity:.7}
+.hud-timer{color:#facc15}.hud-good{color:#4ade80}.hud-wrong{color:#f87171}.hud-remain{color:#93c5fd}
+.doc{max-width:920px;margin:0 auto;padding:36px 36px 96px}
+h1{font-size:20px;font-weight:700;margin:40px 0 10px;padding-bottom:7px;border-bottom:3px solid #004687;color:#004687}
+h2{font-size:16px;font-weight:700;margin:26px 0 8px;color:#2E5090}
+h3{font-size:13px;font-weight:700;margin:18px 0 6px;text-transform:uppercase;letter-spacing:.06em;color:#374151}
+p{margin:4px 0 6px}
+ul{margin:4px 0 8px 0;padding:0;list-style:none}
+ul li{position:relative;padding-left:20px;margin:3px 0;line-height:1.75}
+ul li::before{content:"•";position:absolute;left:4px;color:#374151;font-weight:700}
+ul ul{margin:2px 0 4px 0}ul ul li::before{content:"–";color:#9ca3af;font-weight:400;left:4px}
+li>p{margin:0;display:inline}
+.tbl-wrap{overflow-x:auto;margin:14px 0 18px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:#004687;color:#fff;padding:9px 13px;text-align:left;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+th[style]{background:revert;color:revert;text-transform:revert;letter-spacing:revert}
+td{padding:8px 13px;border:1px solid #ddd;vertical-align:top}
+tr:nth-child(even) td{background:#f7f6f2}
+p[style*="border-left"]{border-radius:0 6px 6px 0;margin:10px 0;padding:10px 14px 10px 16px}
+.group-cloze{display:inline;border-radius:3px;cursor:pointer}
+.group-cloze.cloze{background:#111;color:#111;user-select:none}
+.group-cloze.cloze span.word{background:#111!important;color:#111!important;pointer-events:none}
+.group-cloze.cloze:hover,.group-cloze.cloze:hover span.word{background:#333!important;color:#333!important}
+.group-cloze.revealed{background:var(--reveal-bg);color:var(--reveal-fg);font-weight:700}
+.group-cloze.revealed span.word{background:transparent!important;color:inherit!important;font-weight:700;pointer-events:none}
+.group-cloze.revealed:hover{background:#a7f3d0}
+span.word{cursor:pointer;border-radius:3px;padding:1px 1px;margin:0 -1px;transition:background .1s;display:inline}
+span.word:hover{background:#dbeafe;color:#1e3a8a}
+span.word.cloze{background:var(--cloze);color:var(--cloze);border-radius:3px;cursor:pointer;user-select:none;min-width:1.5ch;display:inline-block}
+span.word.cloze:hover{background:#333;color:#333}
+span.word.revealed{background:var(--reveal-bg);color:var(--reveal-fg);font-weight:700;cursor:pointer;border-radius:3px}
+span.word.revealed:hover{background:#a7f3d0}
+span.word.anki-wrong{background:#fee2e2;color:#991b1b;border-radius:3px;font-weight:700}
+th span.word.revealed{color:var(--reveal-fg)}
+#selHint{display:none;position:absolute;background:#1d4ed8;color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:6px;pointer-events:none;z-index:9999;letter-spacing:.04em;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.info{position:fixed;bottom:0;left:0;right:0;background:#0f172a;border-top:1px solid #1e40af;padding:7px 24px;font-size:11px;color:#94a3b8;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.info b{color:#e2e8f0;font-weight:700}
+.toast{position:fixed;top:64px;right:20px;background:#065f46;color:#fff;padding:8px 18px;border-radius:6px;font-size:13px;font-weight:700;z-index:9999;pointer-events:none;transition:opacity .4s}
+.touch-btns{display:none;position:fixed;bottom:44px;left:50%;transform:translateX(-50%);z-index:250;gap:16px;flex-direction:row}
+.touch-btns.active{display:flex}
+.touch-btn{font-family:'IBM Plex Sans',sans-serif;font-size:15px;font-weight:700;width:130px;height:54px;border:none;border-radius:14px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:transform .1s;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.touch-btn:active{transform:scale(.94)}
+.touch-btn-good{background:#22c55e;color:#fff}.touch-btn-wrong{background:#ef4444;color:#fff}
+#lpHint{display:none;position:fixed;bottom:112px;left:50%;transform:translateX(-50%);background:#1d4ed8;color:#fff;font-size:13px;font-weight:700;padding:8px 18px;border-radius:20px;z-index:9999;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,.3);white-space:nowrap}
+.hy-box{background:#fffef0;border:2px solid #004687;border-radius:8px;padding:20px 24px;margin:16px 0 24px}
+.hy-box h4{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:none;margin:16px 0 6px;padding-bottom:4px;border-bottom:1px solid #e5e7eb}
+.hy-box h4:first-child{margin-top:0}
+.hy-box ul{margin:0 0 4px 0}
+.hy-box ul li{margin:4px 0;font-size:13.5px;line-height:1.65}
+.hy-box ul li::before{color:#004687}
+@media print{.topbar,.info{display:none}.doc{padding:20px}span.word.cloze{background:#000!important;color:#000!important}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-title">Brachial Plexus Anatomy</div>
+    <div class="counter">Hidden: <span id="cnt">0</span></div>
+  </div>
+  <div class="topbar-right">
+    <span class="hint">Click any word to hide</span>
+    <button class="btn btn-remote" id="remoteBtn" onclick="toggleRemote()">&#9654; Remote Off</button>
+    <button class="btn btn-wrong" id="wrongBtn" onclick="reviewWrong()" style="display:none">&#10007; Review Wrong (<span id="wrongBadge">0</span>)</button>
+    <button class="btn btn-rehide" onclick="rehideAll()">Re-hide All</button>
+    <button class="btn btn-reveal" onclick="revealAll()">Reveal All</button>
+    <button class="btn btn-restore" onclick="restoreAll()">Restore All</button>
+    <button class="btn btn-save" onclick="saveState()">Save</button>
+    <button class="btn btn-load" onclick="loadState()">Load</button>
+  </div>
+</div>
+<div class="modal-overlay" id="sessionModal">
+  <div class="modal">
+    <div class="modal-title">⚙ Configure Study Session</div>
+    <div class="modal-section">
+      <div class="modal-label">Section filter</div>
+      <div class="toggle-row">
+        <label class="toggle-switch"><input type="checkbox" id="useSections" onchange="updatePreview()"><span class="toggle-slider"></span></label>
+        <div><div class="toggle-desc">Limit to specific sections</div><div class="toggle-sub">Only clozes inside selected sections will be queued</div></div>
+      </div>
+      <div class="section-grid" id="sectionGrid">        <div class="section-chip" data-sec="__ALL__" onclick="toggleAll(this)" style="grid-column:1/-1;background:#f0f4ff;border-color:#93c5fd;color:#1e3a8a;text-align:center;">⬛ Whole Document</div>
+        <div class="section-chip" data-sec="HIGH-YIELD SUMMARY: CRNA BOARD-TESTABLE FACTS" onclick="toggleChip(this)">HIGH-YIELD SUMMARY: CRNA BOARD-TES…</div>
+        <div class="section-chip" data-sec="BRACHIAL PLEXUS OVERVIEW" onclick="toggleChip(this)">BRACHIAL PLEXUS OVERVIEW</div>
+        <div class="section-chip" data-sec="1. ROOTS" onclick="toggleChip(this)">ROOTS</div>
+        <div class="section-chip" data-sec="2. TRUNKS" onclick="toggleChip(this)">TRUNKS</div>
+        <div class="section-chip" data-sec="3. DIVISIONS" onclick="toggleChip(this)">DIVISIONS</div>
+        <div class="section-chip" data-sec="4. CORDS" onclick="toggleChip(this)">CORDS</div>
+        <div class="section-chip" data-sec="5. BRANCHES OF THE CORDS" onclick="toggleChip(this)">BRANCHES OF THE CORDS</div>
+        <div class="section-chip" data-sec="6. TERMINAL NERVES / BRANCHES" onclick="toggleChip(this)">TERMINAL NERVES / BRANCHES</div>
+        <div class="section-chip" data-sec="7. INNERVATION REVIEW" onclick="toggleChip(this)">INNERVATION REVIEW</div>
+        <div class="section-chip" data-sec="8. INTERCOSTOBRACHIAL NERVE (T2)" onclick="toggleChip(this)">INTERCOSTOBRACHIAL NERVE (T2)</div>
+        <div class="section-chip" data-sec="9. INJURY ASSESSMENT" onclick="toggleChip(this)">INJURY ASSESSMENT</div>
+</div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-label">Time box</div>
+      <div class="toggle-row">
+        <label class="toggle-switch"><input type="checkbox" id="useTime" onchange="updatePreview()"><span class="toggle-slider"></span></label>
+        <div><div class="toggle-desc">Stop after a time limit</div><div class="toggle-sub">Auto-saves on expiry</div></div>
+      </div>
+      <div class="num-input"><input type="number" id="timeLimit" value="20" min="1" max="180" oninput="updatePreview()"><label>minutes</label></div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-label">Card limit</div>
+      <div class="toggle-row">
+        <label class="toggle-switch"><input type="checkbox" id="useCards" onchange="updatePreview()"><span class="toggle-slider"></span></label>
+        <div><div class="toggle-desc">Stop after N cards</div><div class="toggle-sub">Picks up where you left off next session</div></div>
+      </div>
+      <div class="num-input"><input type="number" id="cardLimit" value="25" min="1" max="500" oninput="updatePreview()"><label>cards</label></div>
+    </div>
+    <div class="modal-preview" id="sessionPreview">Loading preview…</div>
+    <div class="modal-footer">
+      <button class="modal-btn modal-btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-btn modal-btn-start" onclick="startSession()">Start Session ▶</button>
+    </div>
+  </div>
+</div>
+<div class="hud" id="sessionHUD">
+  <div class="hud-phase" id="hudPhase">▶ REVEAL</div>
+  <div class="hud-stats">
+    <div class="hud-stat hud-remain"><span class="v" id="hudRemain">0</span><span class="k">Left</span></div>
+    <div class="hud-stat hud-good"><span class="v" id="hudGood">0</span><span class="k">Good</span></div>
+    <div class="hud-stat hud-wrong"><span class="v" id="hudWrong">0</span><span class="k">Wrong</span></div>
+    <div class="hud-stat hud-timer" id="hudTimerWrap" style="display:none"><span class="v" id="hudTimer">--:--</span><span class="k">Time</span></div>
+  </div>
+</div>
+<div class="touch-btns" id="touchBtns">
+  <button class="touch-btn touch-btn-wrong" ontouchend="e_ankiWrong(event)" onclick="ankiWrong()">✗ Wrong</button>
+  <button class="touch-btn touch-btn-good"  ontouchend="e_ankiGood(event)"  onclick="ankiSpace()">✓ Good</button>
+</div>
+<div id="lpHint"></div>
+<div id="selHint">Press C to group as one cloze</div>
+<div class="doc" id="doc">
+<p style="text-align:center"><span style="color:#004687;font-size:27px;font-weight:700"><span class="word">BRACHIAL</span> <span class="word">PLEXUS</span> <span class="word">ANATOMY</span></span></p>
+<p style="text-align:center"><span style="color:#004687;font-size:24px;font-weight:700"><span class="word">BRIEFING</span> <span class="word">DOCUMENT</span></span></p>
+<h1>&nbsp;</h1>
+<h1 style="margin-top:6px;margin-bottom:3px"><span style="color:#004687;font-size:21px;font-weight:700"><span class="word">HIGH-YIELD</span> <span class="word">SUMMARY:</span> <span class="word">CRNA</span> <span class="word">BOARD-TESTABLE</span> <span class="word">FACTS</span></span></h1>
+<div class="hy-box">
+<h4><span style="color:#004687;font-size:13px;font-weight:700"><span class="word">STRUCTURE</span> <span class="word">&</span> <span class="word">ORGANIZATION</span></span></h4>
+<ul>
+<li><span style="font-size:13px"><span class="word">Brachial</span> <span class="word">plexus:</span> <span class="word">ventral</span> <span class="word">rami</span> <span class="word">of</span> <span class="word">C5-C8</span> <span class="word">&</span> <span class="word">T1</span> <span class="word">(small</span> <span class="word">contributions</span> <span class="word">from</span> <span class="word">C4</span> <span class="word">&</span> <span class="word">T2)</span></span></li>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Components:</span> <span class="word">5</span> <span class="word">roots</span> <span class="word">→</span> <span class="word">3</span> <span class="word">trunks</span> <span class="word">→</span> <span class="word">6</span> <span class="word">divisions</span> <span class="word">→</span> <span class="word">3</span> <span class="word">cords</span> <span class="word">→</span> <span class="word">5</span> <span class="word">terminal</span> <span class="word">branches</span></span></li>
+<li><span style="font-size:13px"><span class="word">Mnemonic:</span> <span class="word">"Randy</span> <span class="word">Travis</span> <span class="word">Drinks</span> <span class="word">Cold</span> <span class="word">Beer"</span> <span class="word">(Roots,</span> <span class="word">Trunks,</span> <span class="word">Divisions,</span> <span class="word">Cords,</span> <span class="word">Branches)</span> <span class="word">—</span> <span class="word">"5</span> <span class="word">3</span> <span class="word">6</span> <span class="word">3</span> <span class="word">5"</span></span></li>
+<li><span style="font-size:13px"><span class="word">Supraclavicular</span> <span class="word">=</span> <span class="word">roots</span> <span class="word">+</span> <span class="word">trunks</span> <span class="word">+</span> <span class="word">divisions</span> <span class="word">(posterior</span> <span class="word">triangle</span> <span class="word">of</span> <span class="word">neck)</span></span></li>
+<li><span style="font-size:13px"><span class="word">Infraclavicular</span> <span class="word">=</span> <span class="word">cords</span> <span class="word">+</span> <span class="word">terminal</span> <span class="word">branches</span> <span class="word">(axilla)</span></span></li>
+</ul>
+<h4><span style="color:#004687;font-size:13px;font-weight:700"><span class="word">KEY</span> <span class="word">NERVE</span> <span class="word">ROOTS</span> <span class="word">&</span> <span class="word">CLINICAL</span> <span class="word">CORRELATES</span></span></h4>
+<ul>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Phrenic</span> <span class="word">nerve</span> <span class="word">(C3,</span> <span class="word">C4,</span> <span class="word">C5):</span> </span><span style="font-size:13px"><span class="word">almost</span> <span class="word">always</span> <span class="word">blocked</span> <span class="word">during</span> <span class="word">interscalene</span> <span class="word">block</span> <span class="word">→</span> <span class="word">hemidiaphragmatic</span> <span class="word">paralysis</span></span></li>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Long</span> <span class="word">thoracic</span> <span class="word">nerve</span> <span class="word">(C5-C7):</span> </span><span style="font-size:13px"><span class="word">serratus</span> <span class="word">anterior;</span> <span class="word">injury</span> <span class="word">→</span> <span class="word">winged</span> <span class="word">scapula</span></span></li>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Dorsal</span> <span class="word">scapular</span> <span class="word">nerve</span> <span class="word">(C5):</span> </span><span style="font-size:13px"><span class="word">levator</span> <span class="word">scapulae</span> <span class="word">&</span> <span class="word">rhomboids</span></span></li>
+</ul>
+<h4><span style="color:#004687;font-size:13px;font-weight:700"><span class="word">TERMINAL</span> <span class="word">BRANCHES</span></span></h4>
+<ul>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Musculocutaneous</span> <span class="word">(C5-C7),</span> <span class="word">Median</span> <span class="word">(C6-T1),</span> <span class="word">Ulnar</span> <span class="word">(C8-T1),</span> <span class="word">Radial</span> <span class="word">(C5-T1),</span> <span class="word">Axillary</span> <span class="word">(C5-C6)</span></span></li>
+<li><span style="font-size:13px"><span class="word">Cords</span> <span class="word">named</span> <span class="word">by</span> <span class="word">relationship</span> <span class="word">to</span> <span class="word">axillary</span> <span class="word">artery</span></span></li>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Posterior</span> <span class="word">cord</span> <span class="word">mnemonic</span> <span class="word">"STARS":</span> </span><span style="font-size:13px"><span class="word">Subscapular</span> <span class="word">(upper),</span> <span class="word">Thoracodorsal,</span> <span class="word">Axillary,</span> <span class="word">Radial,</span> <span class="word">Subscapular</span> <span class="word">(lower)</span></span></li>
+</ul>
+<h4><span style="color:#C00000;font-size:13px;font-weight:700"><span class="word">INJURY</span> <span class="word">PATTERNS</span> <span class="word">(HIGH-YIELD)</span></span></h4>
+<ul>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Erb-Duchenne</span> <span class="word">palsy</span> <span class="word">(C5-C6):</span> </span><span style="font-size:13px"><span class="word">"waiter's</span> <span class="word">tip"</span> <span class="word">—</span> <span class="word">adducted</span> <span class="word">shoulder,</span> <span class="word">medially</span> <span class="word">rotated</span> <span class="word">arm,</span> <span class="word">extended</span> <span class="word">elbow,</span> <span class="word">pronated</span> <span class="word">forearm,</span> <span class="word">flexed</span> <span class="word">wrist</span></span></li>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Radial</span> <span class="word">nerve</span> <span class="word">injury:</span> </span><span style="font-size:13px"><span class="word">wrist</span> <span class="word">drop</span> <span class="word">(IM</span> <span class="word">deltoid</span> <span class="word">injection</span> <span class="word">or</span> <span class="word">tight</span> <span class="word">cast</span> <span class="word">over</span> <span class="word">mid-humerus)</span></span></li>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Median</span> <span class="word">nerve</span> <span class="word">injury:</span> </span><span style="font-size:13px"><span class="word">numbness/tingling</span> <span class="word">palm</span> <span class="word">&</span> <span class="word">lateral</span> <span class="word">3.5</span> <span class="word">digits,</span> <span class="word">weak</span> <span class="word">pronation</span> <span class="word">&</span> <span class="word">thumb</span> <span class="word">movements</span></span></li>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Ulnar</span> <span class="word">nerve</span> <span class="word">injury:</span> </span><span style="font-size:13px"><span class="word">"claw</span> <span class="word">hand"</span> <span class="word">—</span> <span class="word">inability</span> <span class="word">to</span> <span class="word">abduct/adduct</span> <span class="word">digits,</span> <span class="word">interosseous</span> <span class="word">atrophy,</span> <span class="word">loss</span> <span class="word">of</span> <span class="word">sensation</span> <span class="word">medial</span> <span class="word">1.5</span> <span class="word">digits</span></span></li>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Long</span> <span class="word">thoracic</span> <span class="word">nerve</span> <span class="word">injury:</span> </span><span style="font-size:13px"><span class="word">winged</span> <span class="word">scapula,</span> <span class="word">cannot</span> <span class="word">abduct</span> <span class="word">arm</span> <span class="word">beyond</span> <span class="word">horizontal</span></span></li>
+</ul>
+<h4><span style="color:#004687;font-size:13px;font-weight:700"><span class="word">BLOCK</span> <span class="word">RELEVANCE</span></span></h4>
+<ul>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Interscalene</span> <span class="word">block:</span> </span><span style="font-size:13px"><span class="word">targets</span> <span class="word">trunks</span> <span class="word">(supraclavicular);</span> <span class="word">almost</span> <span class="word">always</span> <span class="word">blocks</span> <span class="word">phrenic</span> <span class="word">nerve</span></span></li>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Supraclavicular</span> <span class="word">block:</span> </span><span style="font-size:13px"><span class="word">targets</span> <span class="word">divisions</span> <span class="word">at</span> <span class="word">level</span> <span class="word">of</span> <span class="word">1st</span> <span class="word">rib;</span> <span class="word">less</span> <span class="word">frequent</span> <span class="word">phrenic</span> <span class="word">block</span></span></li>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Axillary</span> <span class="word">block:</span> </span><span style="font-size:13px"><span class="word">targets</span> <span class="word">terminal</span> <span class="word">branches</span></span></li>
+<li><span style="font-size:13px;font-weight:700"><span class="word">Intercostobrachial</span> <span class="word">nerve</span> <span class="word">(T2):</span> </span><span style="font-size:13px"><span class="word">NOT</span> <span class="word">part</span> <span class="word">of</span> <span class="word">BP</span> <span class="word">—</span> <span class="word">may</span> <span class="word">require</span> <span class="word">separate</span> <span class="word">field</span> <span class="word">block</span> <span class="word">for</span> <span class="word">tourniquet/medial</span> <span class="word">arm</span> <span class="word">surgery</span></span></li>
+<li><span style="font-size:13px"><span class="word">BP</span> <span class="word">blocks</span> <span class="word">won't</span> <span class="word">cover</span> <span class="word">distal</span> <span class="word">clavicular</span> <span class="word">fractures</span> <span class="word">(supraclavicular</span> <span class="word">nerve</span> <span class="word">C3-C4,</span> <span class="word">not</span> <span class="word">part</span> <span class="word">of</span> <span class="word">BP)</span></span></li>
+</ul>
+</div>
+<h1 style="margin-top:6px;margin-bottom:3px"><span style="color:#004687;font-size:21px;font-weight:700"><span class="word">BRACHIAL</span> <span class="word">PLEXUS</span> <span class="word">OVERVIEW</span></span></h1>
+<ul>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Origin:</span> </span><span style="font-size:13px"><span class="word">ventral</span> <span class="word">rami</span> <span class="word">of</span> <span class="word">C5-C8</span> <span class="word">&</span> <span class="word">T1</span> <span class="word">spinal</span> <span class="word">nerves</span></span></li>
+<li><span style="font-size:13px"><span class="word">Small</span> <span class="word">contributions</span> <span class="word">may</span> <span class="word">be</span> <span class="word">made</span> <span class="word">by</span> <span class="word">C4</span> <span class="word">&</span> <span class="word">T2</span> <span class="word">nerves</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Supplies:</span> </span><span style="font-size:13px"><span class="word">entire</span> <span class="word">upper</span> <span class="word">limb</span> <span class="word">except</span> <span class="word">trapezius</span> <span class="word">(spinal</span> <span class="word">accessory</span> <span class="word">nerve)</span> <span class="word">and</span> <span class="word">skin</span> <span class="word">of</span> <span class="word">medial</span> <span class="word">upper</span> <span class="word">arm</span> <span class="word">(intercostobrachial</span> <span class="word">nerve)</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Ventral</span> <span class="word">rami:</span> </span><span style="font-size:13px"><span class="word">sensory</span> <span class="word">and</span> <span class="word">motor</span> <span class="word">to</span> <span class="word">periphery,</span> <span class="word">limbs,</span> <span class="word">and</span> <span class="word">trunk</span> <span class="word">of</span> <span class="word">body</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Components:</span> <span class="word">5</span> <span class="word">roots</span> <span class="word">→</span> <span class="word">3</span> <span class="word">trunks</span> <span class="word">→</span> <span class="word">6</span> <span class="word">divisions</span> <span class="word">(2</span> <span class="word">per</span> <span class="word">trunk,</span> <span class="word">ant/post)</span> <span class="word">→</span> <span class="word">3</span> <span class="word">cords</span> <span class="word">→</span> <span class="word">5</span> <span class="word">terminal</span> <span class="word">branches</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Mnemonic:</span> <span class="word">"Randy</span> <span class="word">Travis</span> <span class="word">Drinks</span> <span class="word">Cold</span> <span class="word">Beer"</span> <span class="word">—</span> <span class="word">"5</span> <span class="word">3</span> <span class="word">6</span> <span class="word">3</span> <span class="word">5"</span></span></li>
+<li><span style="font-size:13px"><span class="word">(C8?</span> <span class="word">—</span> <span class="word">Note:</span> <span class="word">C8</span> <span class="word">spinal</span> <span class="word">nerve</span> <span class="word">exits</span> <span class="word">below</span> <span class="word">C7</span> <span class="word">vertebra;</span> <span class="word">there</span> <span class="word">is</span> <span class="word">no</span> <span class="word">C8</span> <span class="word">vertebra)</span></span></li>
+</ul>
+<h1 style="margin-top:6px;margin-bottom:3px"><span style="color:#004687;font-size:21px;font-weight:700"><span class="word">1.</span> <span class="word">ROOTS</span></span></h1>
+<ul>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Roots</span></span><span style="font-size:13px"> <span class="word">line</span> <span class="word">the</span> <span class="word">interval</span> <span class="word">between</span> <span class="word">the</span> <span class="word">anterior</span> <span class="word">and</span> <span class="word">middle</span> <span class="word">scalene</span> <span class="word">muscles</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">3</span> <span class="word">non-terminal</span> <span class="word">branches</span> <span class="word">arise</span> <span class="word">at</span> <span class="word">the</span> <span class="word">root</span> <span class="word">level:</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Dorsal</span> <span class="word">scapular</span> <span class="word">nerve</span> <span class="word">(C5)</span></span><span style="font-size:13px"> <span class="word">—</span> <span class="word">innervates</span> <span class="word">levator</span> <span class="word">scapulae</span> <span class="word">&</span> <span class="word">rhomboids</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Phrenic</span> <span class="word">nerve</span> <span class="word">(C3,</span> <span class="word">C4,</span> <span class="word">C5)</span></span><span style="font-size:13px"> <span class="word">—</span> <span class="word">"keeps</span> <span class="word">the</span> <span class="word">diaphragm</span> <span class="word">alive"</span></span></li>
+<li><span style="font-size:13px"><span class="word">C3-C4</span> <span class="word">contribution</span> <span class="word">not</span> <span class="word">technically</span> <span class="word">part</span> <span class="word">of</span> <span class="word">BP</span> <span class="word">but</span> <span class="word">receives</span> <span class="word">C5</span> <span class="word">contribution</span> <span class="word">&</span> <span class="word">is</span> <span class="word">anatomically</span> <span class="word">relevant</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Long</span> <span class="word">thoracic</span> <span class="word">nerve</span> <span class="word">(C5,</span> <span class="word">C6,</span> <span class="word">C7)</span></span><span style="font-size:13px"> <span class="word">—</span> <span class="word">innervates</span> <span class="word">serratus</span> <span class="word">anterior</span> <span class="word">muscle</span></span></li>
+<li><span style="font-size:13px"><span class="word">Each</span> <span class="word">root</span> <span class="word">has</span> <span class="word">an</span> <span class="word">associated</span> <span class="word">dermatome</span> <span class="word">and</span> <span class="word">myotome</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Phrenic</span> <span class="word">Nerve</span> <span class="word">—</span> <span class="word">Clinical</span> <span class="word">Significance</span></span></h2>
+<ul>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Almost</span> <span class="word">always</span> <span class="word">blocked</span> <span class="word">during</span> <span class="word">interscalene</span> <span class="word">block</span></span><span style="font-size:13px"> <span class="word">&</span> <span class="word">less</span> <span class="word">frequently</span> <span class="word">with</span> <span class="word">supraclavicular</span> <span class="word">block</span></span></li>
+<li><span style="font-size:13px"><span class="word">Resulting</span> <span class="word">in</span> </span><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">hemidiaphragmatic</span> <span class="word">paralysis</span></span><span style="font-size:13px"> <span class="word">→</span> <span class="word">respiratory</span> <span class="word">compromise</span> <span class="word">in</span> <span class="word">patients</span> <span class="word">with</span> <span class="word">poor</span> <span class="word">pulmonary</span> <span class="word">reserve</span></span></li>
+</ul>
+<p style="margin-top:2px;margin-bottom:2px"><span style="color:#C00000;font-size:13px;font-weight:700"><span class="word">CAUTION:</span> <span class="word">Interscalene</span> <span class="word">block</span> <span class="word">contraindicated</span> <span class="word">in</span> <span class="word">patients</span> <span class="word">dependent</span> <span class="word">on</span> <span class="word">unilateral</span> <span class="word">diaphragmatic</span> <span class="word">function</span></span></p>
+<h1 style="margin-top:6px;margin-bottom:3px"><span style="color:#004687;font-size:21px;font-weight:700"><span class="word">2.</span> <span class="word">TRUNKS</span></span></h1>
+<ul>
+<li><span style="font-size:13px"><span class="word">Formed</span> <span class="word">after</span> <span class="word">nerves</span> <span class="word">pass</span> <span class="word">the</span> <span class="word">lateral</span> <span class="word">border</span> <span class="word">of</span> <span class="word">the</span> <span class="word">scalene</span> <span class="word">muscles</span></span></li>
+<li><span style="font-size:13px"><span class="word">Pass</span> <span class="word">through</span> <span class="word">the</span> </span><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">posterior</span> <span class="word">triangle</span> <span class="word">of</span> <span class="word">the</span> <span class="word">neck</span></span></li>
+<li><span style="font-size:13px"><span class="word">Level</span> <span class="word">of</span> </span><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">interscalene</span> <span class="word">block</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Trunk</span> <span class="word">Composition</span></span></h2>
+<ul>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">C5-C6</span> <span class="word">→</span> <span class="word">Upper</span> <span class="word">(superior)</span> <span class="word">trunk</span></span></li>
+<li><span style="font-size:13px"><span class="word">Only</span> <span class="word">trunk</span> <span class="word">that</span> <span class="word">gives</span> <span class="word">off</span> <span class="word">two</span> <span class="word">non-terminal</span> <span class="word">branches:</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Suprascapular</span> <span class="word">nerve</span> <span class="word">(C5)</span></span><span style="font-size:13px"> <span class="word">—</span> <span class="word">innervates</span> <span class="word">supraspinatus</span> <span class="word">m.,</span> <span class="word">infraspinatus</span> <span class="word">m.,</span> <span class="word">posterior</span> <span class="word">glenohumeral</span> <span class="word">joint,</span> <span class="word">subacromial</span> <span class="word">bursa,</span> <span class="word">&</span> <span class="word">AC</span> <span class="word">joint</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Subclavius</span> <span class="word">nerve</span> <span class="word">(C5-C6)</span></span><span style="font-size:13px"> <span class="word">—</span> <span class="word">subclavius</span> <span class="word">muscle</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">C7</span> <span class="word">→</span> <span class="word">Middle</span> <span class="word">trunk</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">C8-T1</span> <span class="word">→</span> <span class="word">Lower</span> <span class="word">(inferior)</span> <span class="word">trunk</span></span></li>
+</ul>
+<h1 style="margin-top:6px;margin-bottom:3px"><span style="color:#004687;font-size:21px;font-weight:700"><span class="word">3.</span> <span class="word">DIVISIONS</span></span></h1>
+<ul>
+<li><span style="font-size:13px"><span class="word">Trunks</span> <span class="word">divide</span> <span class="word">into</span> <span class="word">divisions</span> <span class="word">at</span> <span class="word">the</span> </span><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">lateral</span> <span class="word">border</span> <span class="word">of</span> <span class="word">the</span> <span class="word">1st</span> <span class="word">rib</span></span><span style="font-size:13px"><span class="word">,</span> <span class="word">posterior</span> <span class="word">to</span> <span class="word">the</span> <span class="word">clavicle</span></span></li>
+<li><span style="font-size:13px"><span class="word">Each</span> <span class="word">trunk</span> <span class="word">divides</span> <span class="word">into</span> <span class="word">2</span> <span class="word">divisions:</span> </span><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">anterior</span> <span class="word">&</span> <span class="word">posterior</span> <span class="word">(6</span> <span class="word">total)</span></span></li>
+<li><span style="font-size:13px"><span class="word">Level</span> <span class="word">of</span> </span><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">supraclavicular</span> <span class="word">block</span></span></li>
+<li><span style="font-size:13px"><span class="word">Pass</span> <span class="word">behind</span> <span class="word">the</span> <span class="word">clavicle</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">No</span> <span class="word">non-terminal</span> <span class="word">branches</span> <span class="word">at</span> <span class="word">the</span> <span class="word">division</span> <span class="word">level</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Division</span> <span class="word">Composition</span></span></h2>
+<ul>
+<li><span style="font-size:13px"><span class="word">C5-C6:</span> <span class="word">Superior</span> <span class="word">trunk</span> <span class="word">→</span> <span class="word">anterior</span> <span class="word">&</span> <span class="word">posterior</span> <span class="word">divisions</span></span></li>
+<li><span style="font-size:13px"><span class="word">C7:</span> <span class="word">Middle</span> <span class="word">trunk</span> <span class="word">→</span> <span class="word">anterior</span> <span class="word">&</span> <span class="word">posterior</span> <span class="word">divisions</span></span></li>
+<li><span style="font-size:13px"><span class="word">C8-T1:</span> <span class="word">Inferior</span> <span class="word">trunk</span> <span class="word">→</span> <span class="word">anterior</span> <span class="word">&</span> <span class="word">posterior</span> <span class="word">divisions</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Anatomical</span> <span class="word">Division</span> <span class="word">by</span> <span class="word">Clavicle</span></span></h2>
+<ul>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Supraclavicular:</span> </span><span style="font-size:13px"><span class="word">5</span> <span class="word">nerve</span> <span class="word">roots,</span> <span class="word">3</span> <span class="word">trunks,</span> <span class="word">6</span> <span class="word">divisions</span> <span class="word">—</span> <span class="word">posterior</span> <span class="word">triangle</span> <span class="word">of</span> <span class="word">neck</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Infraclavicular:</span> </span><span style="font-size:13px"><span class="word">3</span> <span class="word">cords</span> <span class="word">&</span> <span class="word">terminal</span> <span class="word">branches</span> <span class="word">—</span> <span class="word">within</span> <span class="word">the</span> <span class="word">axilla</span></span></li>
+</ul>
+<h1 style="margin-top:6px;margin-bottom:3px"><span style="color:#004687;font-size:21px;font-weight:700"><span class="word">4.</span> <span class="word">CORDS</span></span></h1>
+<ul>
+<li><span style="font-size:13px"><span class="word">In</span> <span class="word">the</span> <span class="word">axilla,</span> <span class="word">divisions</span> <span class="word">unite</span> <span class="word">to</span> <span class="word">form</span> <span class="word">cords</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Named</span> <span class="word">in</span> <span class="word">relationship</span> <span class="word">to</span> <span class="word">the</span> <span class="word">axillary</span> <span class="word">artery</span></span><span style="font-size:13px"> <span class="word">(lateral</span> <span class="word">is</span> <span class="word">lateral</span> <span class="word">to</span> <span class="word">axillary</span> <span class="word">artery,</span> <span class="word">etc.)</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Lateral</span> <span class="word">Cord</span> <span class="word">(C5-C7)</span></span></h2>
+<ul>
+<li><span style="font-size:13px"><span class="word">Formed</span> <span class="word">by</span> <span class="word">anterior</span> <span class="word">divisions</span> <span class="word">of</span> <span class="word">superior</span> <span class="word">&</span> <span class="word">middle</span> <span class="word">trunks</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Posterior</span> <span class="word">Cord</span> <span class="word">(C5-T1)</span></span></h2>
+<ul>
+<li><span style="font-size:13px"><span class="word">All</span> <span class="word">3</span> <span class="word">posterior</span> <span class="word">divisions</span> <span class="word">unite</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Medial</span> <span class="word">Cord</span> <span class="word">(C8-T1)</span></span></h2>
+<ul>
+<li><span style="font-size:13px"><span class="word">Formed</span> <span class="word">by</span> <span class="word">anterior</span> <span class="word">division</span> <span class="word">of</span> <span class="word">inferior</span> <span class="word">trunk</span></span></li>
+</ul>
+<h1 style="margin-top:6px;margin-bottom:3px"><span style="color:#004687;font-size:21px;font-weight:700"><span class="word">5.</span> <span class="word">BRANCHES</span> <span class="word">OF</span> <span class="word">THE</span> <span class="word">CORDS</span></span></h1>
+<p><span style="font-size:13px;font-weight:700"><span class="word">Note:</span> </span><span style="font-size:13px;font-style:italic"><span class="word">Lateral</span> <span class="word">&</span> <span class="word">medial</span> <span class="word">cords</span> <span class="word">predominantly</span> <span class="word">supply</span> <span class="word">ventral</span> <span class="word">portions</span> <span class="word">of</span> <span class="word">the</span> <span class="word">upper</span> <span class="word">extremity;</span> <span class="word">posterior</span> <span class="word">cord</span> <span class="word">branches</span> <span class="word">predominantly</span> <span class="word">supply</span> <span class="word">the</span> <span class="word">dorsal</span> <span class="word">portion.</span></span></p>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Lateral</span> <span class="word">Cord</span> <span class="word">—</span> <span class="word">3</span> <span class="word">Branches</span></span></h2>
+<ul>
+<li><span style="font-size:13px"><span class="word">Lateral</span> <span class="word">pectoral</span> <span class="word">nerve</span> <span class="word">—</span> <span class="word">pectoralis</span> <span class="word">major</span> <span class="word">m.</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Musculocutaneous</span> <span class="word">nerve</span></span><span style="font-size:13px"> <span class="word">(terminal)</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Median</span> <span class="word">nerve</span> <span class="word">(lateral</span> <span class="word">root)</span></span><span style="font-size:13px"> <span class="word">(terminal)</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Posterior</span> <span class="word">Cord</span> <span class="word">—</span> <span class="word">5</span> <span class="word">Branches</span> <span class="word">(Mnemonic:</span> <span class="word">"STARS")</span></span></h2>
+<ul>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">S</span></span><span style="font-size:13px"><span class="word">ubscapular</span> <span class="word">(upper)</span> <span class="word">—</span> <span class="word">subscapularis</span> <span class="word">m.</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">T</span></span><span style="font-size:13px"><span class="word">horacodorsal</span> <span class="word">—</span> <span class="word">latissimus</span> <span class="word">dorsi</span> <span class="word">m.</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Axillary</span></span><span style="font-size:13px"> <span class="word">(terminal)</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Radial</span></span><span style="font-size:13px"> <span class="word">(terminal)</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">S</span></span><span style="font-size:13px"><span class="word">ubscapular</span> <span class="word">(lower)</span> <span class="word">—</span> <span class="word">subscapularis</span> <span class="word">m.</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Medial</span> <span class="word">Cord</span> <span class="word">—</span> <span class="word">5</span> <span class="word">Branches</span></span></h2>
+<ul>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Ulnar</span> <span class="word">nerve</span></span><span style="font-size:13px"> <span class="word">(terminal)</span></span></li>
+<li><span style="font-size:13px"><span class="word">Medial</span> <span class="word">pectoral</span> <span class="word">nerve</span> <span class="word">(C8-T1)</span> <span class="word">—</span> <span class="word">pectoralis</span> <span class="word">major</span> <span class="word">&</span> <span class="word">minor</span> <span class="word">mm.</span></span></li>
+<li><span style="font-size:13px"><span class="word">Medial</span> <span class="word">cutaneous</span> <span class="word">nerve</span> <span class="word">of</span> <span class="word">forearm</span> <span class="word">(medial</span> <span class="word">antebrachial</span> <span class="word">cutaneous</span> <span class="word">n.)</span> <span class="word">—</span> <span class="word">sensory</span></span></li>
+<li><span style="font-size:13px"><span class="word">Medial</span> <span class="word">cutaneous</span> <span class="word">nerve</span> <span class="word">of</span> <span class="word">arm</span> <span class="word">(medial</span> <span class="word">brachial</span> <span class="word">cutaneous</span> <span class="word">n.)</span> <span class="word">—</span> <span class="word">sensory</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Median</span> <span class="word">nerve</span> <span class="word">(medial</span> <span class="word">root)</span></span><span style="font-size:13px"> <span class="word">(terminal)</span></span></li>
+</ul>
+<h1 style="margin-top:6px;margin-bottom:3px"><span style="color:#004687;font-size:21px;font-weight:700"><span class="word">6.</span> <span class="word">TERMINAL</span> <span class="word">NERVES</span> <span class="word">/</span> <span class="word">BRANCHES</span></span></h1>
+<ul>
+<li><span style="font-size:13px"><span class="word">Targeted</span> <span class="word">at</span> <span class="word">the</span> <span class="word">level</span> <span class="word">of</span> <span class="word">an</span> </span><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">axillary</span> <span class="word">block</span></span></li>
+</ul>
+<div class="tbl-wrap"><table>
+<tr>
+<th style="background:#004687;color:#fff"><span style="color:#FFFFFF;font-size:12px;font-weight:700"><span class="word">Terminal</span> <span class="word">Nerve</span></span></th>
+<th style="background:#004687;color:#fff"><span style="color:#FFFFFF;font-size:12px;font-weight:700"><span class="word">Root</span> <span class="word">Value</span></span></th>
+<th style="background:#004687;color:#fff"><span style="color:#FFFFFF;font-size:12px;font-weight:700"><span class="word">Cord</span> <span class="word">Origin</span></span></th>
+</tr>
+<tr>
+<td><span style="font-size:12px"><span class="word">Musculocutaneous</span></span></td>
+<td><span style="font-size:12px"><span class="word">C5-C7</span></span></td>
+<td><span style="font-size:12px"><span class="word">Lateral</span></span></td>
+</tr>
+<tr>
+<td><span style="font-size:12px"><span class="word">Median</span></span></td>
+<td><span style="font-size:12px"><span class="word">C6-T1</span></span></td>
+<td><span style="font-size:12px"><span class="word">Lateral</span> <span class="word">+</span> <span class="word">Medial</span></span></td>
+</tr>
+<tr>
+<td><span style="font-size:12px"><span class="word">Ulnar</span></span></td>
+<td><span style="font-size:12px"><span class="word">C8-T1</span></span></td>
+<td><span style="font-size:12px"><span class="word">Medial</span></span></td>
+</tr>
+<tr>
+<td><span style="font-size:12px"><span class="word">Radial</span></span></td>
+<td><span style="font-size:12px"><span class="word">C5-T1</span></span></td>
+<td><span style="font-size:12px"><span class="word">Posterior</span></span></td>
+</tr>
+<tr>
+<td><span style="font-size:12px"><span class="word">Axillary</span></span></td>
+<td><span style="font-size:12px"><span class="word">C5-C6</span></span></td>
+<td><span style="font-size:12px"><span class="word">Posterior</span></span></td>
+</tr>
+</table></div>
+<h1 style="margin-top:6px;margin-bottom:3px"><span style="color:#004687;font-size:21px;font-weight:700"><span class="word">7.</span> <span class="word">INNERVATION</span> <span class="word">REVIEW</span></span></h1>
+<p><span style="color:#C00000;font-size:13px;font-weight:700"><span class="word">You</span> <span class="word">must</span> <span class="word">know</span> <span class="word">this:</span> <span class="word">Sensory,</span> <span class="word">Motor,</span> <span class="word">Osteotomes,</span> <span class="word">Clinical</span> <span class="word">Assessment,</span> <span class="word">Injury</span> <span class="word">Assessment</span></span></p>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Sensory</span> <span class="word">Innervation</span> <span class="word">(Dermatomes)</span></span></h2>
+<ul>
+<li><span style="font-size:13px"><span class="word">Dermatomes</span> <span class="word">correspond</span> <span class="word">to</span> </span><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">dorsal</span> <span class="word">sensory</span> <span class="word">nerve</span> <span class="word">roots</span></span></li>
+<li><span style="font-size:13px"><span class="word">Each</span> <span class="word">root</span> <span class="word">has</span> <span class="word">an</span> <span class="word">associated</span> <span class="word">dermatomal</span> <span class="word">distribution</span> <span class="word">over</span> <span class="word">the</span> <span class="word">upper</span> <span class="word">extremity</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Motor</span> <span class="word">Innervation</span> <span class="word">(Myotomes)</span></span></h2>
+<ul>
+<li><span style="font-size:13px"><span class="word">Myotomes</span> <span class="word">correspond</span> <span class="word">to</span> </span><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">ventral</span> <span class="word">spinal</span> <span class="word">nerve</span> <span class="word">roots</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Contrast:</span> </span><span style="font-size:13px"><span class="word">dermatomes</span> <span class="word">=</span> <span class="word">sensory;</span> <span class="word">osteotomes</span> <span class="word">=</span> <span class="word">bone</span> <span class="word">innervation;</span> <span class="word">myotomes</span> <span class="word">=</span> <span class="word">motor</span></span></li>
+<li><span style="font-size:13px"><span class="word">Do</span> <span class="word">not</span> <span class="word">necessarily</span> <span class="word">correlate</span> <span class="word">with</span> <span class="word">dermatomes</span> <span class="word">(skin)</span> <span class="word">or</span> <span class="word">osteotomes</span> <span class="word">(bone)</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Osteotomes</span></span></h2>
+<ul>
+<li><span style="font-size:13px"><span class="word">Bone</span> <span class="word">innervation</span> <span class="word">—</span> <span class="word">correspond</span> <span class="word">to</span> </span><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">dorsal</span> <span class="word">spinal</span> <span class="word">nerve</span> <span class="word">roots</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Supraclavicular</span> <span class="word">nerve</span> <span class="word">(C3-C4):</span> </span><span style="font-size:13px"><span class="word">BP</span> <span class="word">blocks</span> <span class="word">won't</span> <span class="word">cover</span> <span class="word">distal</span> <span class="word">clavicular</span> <span class="word">fractures</span></span></li>
+</ul>
+<h1 style="margin-top:6px;margin-bottom:3px"><span style="color:#004687;font-size:21px;font-weight:700"><span class="word">8.</span> <span class="word">INTERCOSTOBRACHIAL</span> <span class="word">NERVE</span> <span class="word">(T2)</span></span></h1>
+<p style="margin-top:2px;margin-bottom:2px"><span style="color:#C00000;font-size:13px;font-weight:700"><span class="word">NOT</span> <span class="word">a</span> <span class="word">part</span> <span class="word">of</span> <span class="word">the</span> <span class="word">Brachial</span> <span class="word">Plexus</span></span></p>
+<ul>
+<li><span style="font-size:13px"><span class="word">Arises</span> <span class="word">from</span> <span class="word">the</span> <span class="word">2nd</span> <span class="word">intercostal</span> <span class="word">nerve</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Sensory</span> <span class="word">innervation</span> <span class="word">of</span> <span class="word">medial</span> <span class="word">aspect</span> <span class="word">of</span> <span class="word">upper</span> <span class="word">arm</span></span><span style="font-size:13px"> <span class="word">[Note:</span> <span class="word">"innveration"</span> <span class="word">in</span> <span class="word">original]</span></span></li>
+<li><span style="font-size:13px"><span class="word">May</span> <span class="word">require</span> <span class="word">a</span> </span><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">field</span> <span class="word">block</span> <span class="word">for</span> <span class="word">surgery</span> <span class="word">or</span> <span class="word">tourniquet</span></span></li>
+</ul>
+<h1 style="margin-top:6px;margin-bottom:3px"><span style="color:#004687;font-size:21px;font-weight:700"><span class="word">9.</span> <span class="word">INJURY</span> <span class="word">ASSESSMENT</span></span></h1>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Erb-Duchenne</span> <span class="word">Palsy</span> <span class="word">—</span> <span class="word">Superior</span> <span class="word">Roots</span> <span class="word">(C5-C6)</span></span></h2>
+<ul>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">"Waiter's</span> <span class="word">tip"</span> <span class="word">position</span></span></li>
+<li><span style="font-size:13px"><span class="word">Caused</span> <span class="word">by</span> <span class="word">forceful</span> <span class="word">pulling</span> <span class="word">of</span> <span class="word">head</span> <span class="word">from</span> <span class="word">shoulder</span> <span class="word">(heavy</span> <span class="word">fall</span> <span class="word">on</span> <span class="word">shoulder,</span> <span class="word">excessive</span> <span class="word">stretching</span> <span class="word">of</span> <span class="word">infant's</span> <span class="word">neck</span> <span class="word">during</span> <span class="word">childbirth)</span></span></li>
+<li><span style="font-size:13px"><span class="word">Presentation:</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Adducted</span> <span class="word">shoulder</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Medial</span> <span class="word">rotation</span> <span class="word">of</span> <span class="word">arm</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Extended</span> <span class="word">elbow</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Pronated</span> <span class="word">forearm</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Flexed</span> <span class="word">wrist</span></span></li>
+<li><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">Lateral</span> <span class="word">arm</span> <span class="word">numbness</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Radial</span> <span class="word">Nerve</span> <span class="word">Injury</span></span></h2>
+<ul>
+<li><span style="font-size:13px"><span class="word">May</span> <span class="word">result</span> <span class="word">from</span> <span class="word">IM</span> <span class="word">deltoid</span> <span class="word">injection</span> <span class="word">or</span> <span class="word">tight</span> <span class="word">cast</span> <span class="word">over</span> <span class="word">mid-humerus</span></span></li>
+<li><span style="font-size:13px"><span class="word">Results</span> <span class="word">in</span> </span><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">wrist</span> <span class="word">drop</span></span></li>
+<li><span style="font-size:13px"><span class="word">Sensory</span> <span class="word">loss</span> <span class="word">minimal</span> <span class="word">d/t</span> <span class="word">overlap</span> <span class="word">of</span> <span class="word">adjacent</span> <span class="word">nerves</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Median</span> <span class="word">Nerve</span> <span class="word">Injury</span></span></h2>
+<ul>
+<li><span style="font-size:13px"><span class="word">Numbness,</span> <span class="word">tingling,</span> <span class="word">&</span> <span class="word">pain</span> <span class="word">in</span> <span class="word">palm</span> <span class="word">&</span> <span class="word">lateral</span> <span class="word">3.5</span> <span class="word">digits</span></span></li>
+<li><span style="font-size:13px"><span class="word">Inability</span> <span class="word">to</span> <span class="word">pronate</span> <span class="word">forearm</span> <span class="word">&</span> <span class="word">flex</span> <span class="word">proximal</span> <span class="word">interphalangeal</span> <span class="word">joints</span> <span class="word">of</span> <span class="word">all</span> <span class="word">digits</span> <span class="word">&</span> <span class="word">distal</span> <span class="word">interphalangeal</span> <span class="word">joints</span> <span class="word">of</span> <span class="word">2nd</span> <span class="word">&</span> <span class="word">3rd</span> <span class="word">digits</span></span></li>
+<li><span style="font-size:13px"><span class="word">Wrist</span> <span class="word">flexion</span> <span class="word">weak,</span> <span class="word">accompanied</span> <span class="word">by</span> <span class="word">adduction</span></span></li>
+<li><span style="font-size:13px"><span class="word">Thumb</span> <span class="word">movements</span> <span class="word">weak</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Ulnar</span> <span class="word">Nerve</span> <span class="word">Injury</span></span></h2>
+<ul>
+<li><span style="font-size:13px"><span class="word">Inability</span> <span class="word">to</span> <span class="word">abduct</span> <span class="word">or</span> <span class="word">adduct</span> <span class="word">digits</span></span></li>
+<li><span style="font-size:13px"><span class="word">Atrophy</span> <span class="word">of</span> <span class="word">interosseous</span> <span class="word">muscles</span> <span class="word">of</span> <span class="word">hand</span></span></li>
+<li><span style="font-size:13px"><span class="word">Hyperextension</span> <span class="word">of</span> <span class="word">metacarpophalangeal</span> <span class="word">joints</span></span></li>
+<li><span style="font-size:13px"><span class="word">Flexion</span> <span class="word">of</span> <span class="word">interphalangeal</span> <span class="word">joints</span> <span class="word">—</span> </span><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">"claw</span> <span class="word">hand"</span></span></li>
+<li><span style="font-size:13px"><span class="word">Loss</span> <span class="word">of</span> <span class="word">sensation</span> <span class="word">over</span> <span class="word">medial</span> <span class="word">1.5</span> <span class="word">digits</span></span></li>
+</ul>
+<h2 style="margin-top:3px;margin-bottom:2px"><span style="color:#0070C0;font-size:17px;font-weight:700"><span class="word">Long</span> <span class="word">Thoracic</span> <span class="word">Nerve</span> <span class="word">Injury</span></span></h2>
+<ul>
+<li><span style="font-size:13px"><span class="word">Paralysis</span> <span class="word">of</span> <span class="word">serratus</span> <span class="word">anterior</span> <span class="word">muscle</span></span></li>
+<li><span style="font-size:13px"><span class="word">Results</span> <span class="word">in</span> </span><span style="font-size:13px;font-weight:700;font-style:italic"><span class="word">"winged</span> <span class="word">scapula"</span></span></li>
+<li><span style="font-size:13px"><span class="word">Arm</span> <span class="word">cannot</span> <span class="word">be</span> <span class="word">abducted</span> <span class="word">beyond</span> <span class="word">horizontal</span> <span class="word">position</span></span></li>
+</ul>
+<h1>&nbsp;</h1>
+<p><span style="color:#666666;font-size:12px;font-weight:700;font-style:italic"><span class="word">Sources:</span> </span><span style="color:#666666;font-size:12px;font-style:italic"><span class="word">Innervation</span> <span class="word">review</span> <span class="word">content</span> <span class="word">adapted</span> <span class="word">from</span> <span class="word">Apex</span> <span class="word">Anesthesia</span> <span class="word">—</span> <span class="word">Upper</span> <span class="word">Extremity</span> <span class="word">Blocks</span> <span class="word">—</span> <span class="word">Brachial</span> <span class="word">Plexus</span> <span class="word">Innervation.</span> <span class="word">Anatomy</span> <span class="word">images</span> <span class="word">reference</span> <span class="word">Tortora</span> <span class="word">anatomy</span> <span class="word">textbook.</span></span></p>
+<p style="text-align:center;margin-top:4px"><span style="color:#004687;font-size:15px;font-weight:700"><span class="word">—</span> <span class="word">End</span> <span class="word">of</span> <span class="word">Briefing</span> <span class="word">Document</span> <span class="word">—</span></span></p>
+</div>
+<div class="info">
+  <span><b>Click</b> = hide/reveal</span>
+  <span><b>Double-click</b> = undo one</span>
+  <span><b>Select + C</b> = group cloze</span>
+  <span><b>Remote ON:</b> Space/0 = good | 1 = wrong</span>
+  <span><b>Save/Load</b> = persist</span>
+</div>
+<script>
+let n=0,remoteMode=false,groupCounter=0,pausedSession=null;
+let ankiQueue=[],ankiPos=0,wrongList=[],ankiActive=false,ankiPhase='reveal';
+let correctCount=0,wrongCount=0,totalCards=0,sessionCardsUsed=0;
+let timerInterval=null,timerSecondsLeft=0;
+let persistentWrong=new Set();
+
+const cnt=document.getElementById('cnt');
+const words=Array.from(document.querySelectorAll('span.word'));
+words.forEach((s,i)=>{s.dataset.i=i;});
+
+const wordSection=new Array(words.length).fill('');
+(function(){
+  const kids=Array.from(document.getElementById('doc').querySelectorAll('h1,span.word'));
+  let cur='';
+  kids.forEach(el=>{
+    if(el.tagName==='H1') cur=el.textContent.trim();
+    else{const i=+el.dataset.i;if(!isNaN(i)) wordSection[i]=cur;}
+  });
+})();
+
+function recalcN(){
+  const indiv=document.querySelectorAll('span.word.cloze:not(.group-cloze span.word)').length;
+  const groups=document.querySelectorAll('.group-cloze.cloze').length;
+  n=indiv+groups;cnt.textContent=n;return n;
+}
+
+function buildClozePool(filterFn){
+  const pool=[];
+  words.forEach(s=>{
+    if(s.classList.contains('cloze')&&!s.closest('.group-cloze'))
+      if(!filterFn||filterFn(s)) pool.push(s);
+  });
+  document.querySelectorAll('.group-cloze.cloze').forEach(g=>{
+    const fw=g.querySelector('span.word');if(!fw) return;
+    if(!filterFn||filterFn(fw)) pool.push(g);
+  });
+  pool.sort((a,b)=>a.compareDocumentPosition(b)&4?-1:1);
+  return pool;
+}
+
+function makeGroupCloze(spanEls){
+  if(!spanEls.length) return;
+  const parent=spanEls[0].parentNode;
+  const wrapper=document.createElement('span');
+  wrapper.className='group-cloze cloze';wrapper.dataset.gid=++groupCounter;
+  parent.insertBefore(wrapper,spanEls[0]);
+  const lastSpan=spanEls[spanEls.length-1];
+  const toMove=[];let node=spanEls[0];
+  while(node&&node!==lastSpan.nextSibling){toMove.push(node);node=node.nextSibling;}
+  toMove.forEach(nd=>wrapper.appendChild(nd));
+  wrapper.addEventListener('click',e=>{
+    e.stopPropagation();if(remoteMode)return;
+    if(wrapper.classList.contains('revealed')) wrapper.classList.replace('revealed','cloze');
+    else if(wrapper.classList.contains('cloze')) wrapper.classList.replace('cloze','revealed');
+  });
+  wrapper.addEventListener('dblclick',e=>{
+    e.preventDefault();e.stopPropagation();if(remoteMode)return;
+    dissolveGroup(wrapper);recalcN();toast('Group dissolved');
+  });
+  recalcN();
+}
+function dissolveGroup(wrapper){
+  const parent=wrapper.parentNode;
+  while(wrapper.firstChild){
+    if(wrapper.firstChild.classList&&wrapper.firstChild.classList.contains('word'))
+      wrapper.firstChild.style.pointerEvents='';
+    parent.insertBefore(wrapper.firstChild,wrapper);
+  }
+  parent.removeChild(wrapper);
+}
+
+const selHint=document.getElementById('selHint');
+document.addEventListener('selectionchange',()=>{
+  if(remoteMode){selHint.style.display='none';return;}
+  const sel=window.getSelection();
+  if(!sel||sel.isCollapsed||sel.toString().trim().length<2){selHint.style.display='none';return;}
+  const range=sel.getRangeAt(0);
+  const docEl=document.getElementById('doc');
+  if(!docEl.contains(range.commonAncestorContainer)){selHint.style.display='none';return;}
+  const spansInSel=getWordSpansInRange(range);
+  if(spansInSel.length<2){selHint.style.display='none';return;}
+  const rect=range.getBoundingClientRect();
+  selHint.style.display='block';
+  selHint.style.left=Math.min(rect.left,window.innerWidth-220)+'px';
+  selHint.style.top=(rect.bottom+window.scrollY+6)+'px';
+  selHint.textContent='Press C to group '+spansInSel.length+' words as one cloze';
+});
+function getWordSpansInRange(range){
+  return Array.from(document.getElementById('doc').querySelectorAll('span.word')).filter(s=>{
+    if(s.closest('.group-cloze')) return false;
+    try{const r=document.createRange();r.selectNode(s);
+      return range.compareBoundaryPoints(Range.END_TO_START,r)<0&&range.compareBoundaryPoints(Range.START_TO_END,r)>0;
+    }catch(e){return false;}
+  });
+}
+
+words.forEach(s=>{
+  s.addEventListener('click',e=>{
+    e.stopPropagation();if(remoteMode||s.closest('.group-cloze'))return;
+    if(s.classList.contains('revealed')) s.classList.replace('revealed','cloze');
+    else if(s.classList.contains('cloze')) s.classList.replace('cloze','revealed');
+    else{s.classList.add('cloze');recalcN();}
+  });
+  s.addEventListener('dblclick',e=>{
+    e.preventDefault();e.stopPropagation();
+    if(remoteMode||s.closest('.group-cloze'))return;
+    if(s.classList.contains('cloze')||s.classList.contains('revealed')){
+      s.classList.remove('cloze','revealed');recalcN();toast('Removed');
+    }
+  });
+});
+
+function restoreAll(){
+  document.querySelectorAll('span.word.cloze,span.word.revealed,span.word.anki-wrong')
+    .forEach(s=>s.classList.remove('cloze','revealed','anki-wrong'));
+  document.querySelectorAll('.group-cloze').forEach(g=>dissolveGroup(g));recalcN();
+}
+function revealAll(){
+  document.querySelectorAll('span.word.cloze').forEach(s=>s.classList.replace('cloze','revealed'));
+  document.querySelectorAll('.group-cloze.cloze').forEach(g=>g.classList.replace('cloze','revealed'));
+}
+function rehideAll(){
+  document.querySelectorAll('span.word.revealed').forEach(s=>s.classList.replace('revealed','cloze'));
+  document.querySelectorAll('.group-cloze.revealed').forEach(g=>g.classList.replace('revealed','cloze'));
+}
+
+function loadPersistentWrong(){
+  try{const r=localStorage.getItem('bp_wrong_v1');if(r) persistentWrong=new Set(JSON.parse(r));}catch(e){}
+  updateWrongBtn();
+}
+function savePersistentWrong(){
+  try{localStorage.setItem('bp_wrong_v1',JSON.stringify([...persistentWrong]));}catch(e){}updateWrongBtn();
+}
+function updateWrongBtn(){
+  const c=persistentWrong.size;
+  document.getElementById('wrongBadge').textContent=c;
+  document.getElementById('wrongBtn').style.display=c>0?'inline-block':'none';
+}
+
+function reviewWrong(){
+  if(persistentWrong.size===0){toast('No wrong answers saved');return;}
+  if(remoteMode){
+    pausedSession={queue:[...ankiQueue],pos:ankiPos,wrongList:[...wrongList],correctCount,wrongCount,totalCards,ankiPhase,ankiActive,timeLeft:timerSecondsLeft,hadTimer:document.getElementById('hudTimerWrap').style.display!=='none'};
+    clearInterval(timerInterval);timerInterval=null;remoteMode=false;
+    document.getElementById('remoteBtn').textContent='▶ Remote Off';
+    document.getElementById('remoteBtn').classList.remove('on');
+    document.getElementById('sessionHUD').style.display='none';
+  }else pausedSession=null;
+  const groupMap={};
+  document.querySelectorAll('.group-cloze').forEach(g=>{if(g.dataset.gid) groupMap['g'+g.dataset.gid]=g;});
+  const pool=[];
+  persistentWrong.forEach(key=>{
+    if(typeof key==='string'&&key.startsWith('g')){
+      const g=groupMap[key];if(g&&g.classList.contains('cloze')) pool.push(g);
+      else if(!g) persistentWrong.delete(key);
+    }else{
+      const s=words[key];
+      if(s&&s.classList.contains('cloze')&&!s.closest('.group-cloze')) pool.push(s);
+      else if(s&&!s.classList.contains('cloze')&&!s.classList.contains('revealed')&&!s.classList.contains('anki-wrong'))
+        persistentWrong.delete(key);
+    }
+  });
+  savePersistentWrong();
+  if(pool.length===0){toast('No wrong-marked words are currently hidden');if(pausedSession)resumePausedSession();return;}
+  document.querySelectorAll('span.word.anki-wrong,.group-cloze.anki-wrong').forEach(s=>s.classList.remove('anki-wrong'));
+  pool.sort((a,b)=>a.compareDocumentPosition(b)&4?-1:1);
+  ankiQueue=pool;totalCards=pool.length;ankiPos=0;wrongList=[];correctCount=0;wrongCount=0;ankiPhase='review';ankiActive=false;sessionCardsUsed=0;
+  clearInterval(timerInterval);document.getElementById('hudTimerWrap').style.display='none';
+  remoteMode=true;document.getElementById('remoteBtn').textContent='⏹ Remote ON';document.getElementById('remoteBtn').classList.add('on');
+  document.getElementById('sessionHUD').style.display='block';
+  document.getElementById('hudPhase').textContent=pausedSession?'🔁 REVIEW WRONG — session paused':'🔁 REVIEW WRONG';
+  updateHUD();advanceToNext();
+  toast(pausedSession?'Reviewing '+pool.length+' wrong — session paused':'Reviewing '+pool.length+' wrong answers');
+}
+function resumePausedSession(){
+  if(!pausedSession) return;
+  const ps=pausedSession;pausedSession=null;
+  ankiQueue=ps.queue;ankiPos=ps.pos;wrongList=ps.wrongList;correctCount=ps.correctCount;wrongCount=ps.wrongCount;
+  totalCards=ps.totalCards;ankiPhase=ps.ankiPhase;ankiActive=ps.ankiActive;sessionCardsUsed=0;
+  clearInterval(timerInterval);
+  if(ps.hadTimer&&ps.timeLeft>0){
+    timerSecondsLeft=ps.timeLeft;document.getElementById('hudTimerWrap').style.display='flex';updateTimerDisplay();
+    timerInterval=setInterval(()=>{timerSecondsLeft--;updateTimerDisplay();if(timerSecondsLeft<=0){clearInterval(timerInterval);endSession("Time's up!");}},1000);
+  }else document.getElementById('hudTimerWrap').style.display='none';
+  remoteMode=true;document.getElementById('remoteBtn').textContent='⏹ Remote ON';document.getElementById('remoteBtn').classList.add('on');
+  document.getElementById('sessionHUD').style.display='block';
+  updateHUD();if(ankiQueue[ankiPos]) scrollToWord(ankiQueue[ankiPos]);toast('Back to your session ▶');
+}
+
+function openModal(){updatePreview();document.getElementById('sessionModal').classList.add('open');}
+function closeModal(){document.getElementById('sessionModal').classList.remove('open');}
+function toggleChip(el){document.querySelector('[data-sec="__ALL__"]').classList.remove('selected');el.classList.toggle('selected');updatePreview();}
+function toggleAll(el){
+  const on=!el.classList.contains('selected');
+  document.querySelectorAll('.section-chip:not([data-sec="__ALL__"])').forEach(c=>c.classList.remove('selected'));
+  el.classList.toggle('selected',on);updatePreview();
+}
+function updatePreview(){
+  const useSec=document.getElementById('useSections').checked;
+  const useTime=document.getElementById('useTime').checked;
+  const useCards=document.getElementById('useCards').checked;
+  const timeLim=parseInt(document.getElementById('timeLimit').value)||20;
+  const cardLim=parseInt(document.getElementById('cardLimit').value)||25;
+  const allSel=document.querySelector('[data-sec="__ALL__"]').classList.contains('selected');
+  const selChips=Array.from(document.querySelectorAll('.section-chip.selected:not([data-sec="__ALL__"])'));
+  const selSecs=selChips.map(c=>c.dataset.sec);
+  let avail=buildClozePool(null);
+  if(useSec&&!allSel&&selSecs.length>0) avail=buildClozePool(s=>selSecs.some(sec=>wordSection[+s.dataset.i].includes(sec)));
+  let count=avail.length,effective=count;
+  if(useCards) effective=Math.min(effective,cardLim);
+  let parts=[];
+  if(useSec) parts.push(allSel?'Whole document':selSecs.length>0?selChips.map(c=>c.textContent).join(', '):'No section selected');
+  else parts.push('All sections');
+  if(useTime) parts.push(timeLim+' min');if(useCards) parts.push(cardLim+' cards');
+  const prev=document.getElementById('sessionPreview');
+  if(count===0){prev.textContent='No hidden words match. Hide some words first.';prev.style.cssText='background:#fff1f2;border-color:#fca5a5;color:#b91c1c';}
+  else{prev.style.cssText='background:#f0fdf4;border-color:#86efac;color:#166534';prev.textContent='▶ '+effective+' cards queued ('+count+' available) — '+parts.join(' · ');}
+  document.getElementById('sectionGrid').style.opacity=useSec?'1':'0.4';
+  document.getElementById('sectionGrid').style.pointerEvents=useSec?'auto':'none';
+}
+function startSession(){
+  const useSec=document.getElementById('useSections').checked;
+  const useTime=document.getElementById('useTime').checked;
+  const useCards=document.getElementById('useCards').checked;
+  const timeLim=parseInt(document.getElementById('timeLimit').value)||20;
+  const cardLim=parseInt(document.getElementById('cardLimit').value)||25;
+  const allSel=document.querySelector('[data-sec="__ALL__"]').classList.contains('selected');
+  const selSecs=Array.from(document.querySelectorAll('.section-chip.selected:not([data-sec="__ALL__"])')).map(c=>c.dataset.sec);
+  let pool=buildClozePool(null);
+  if(useSec&&!allSel&&selSecs.length>0) pool=buildClozePool(s=>selSecs.some(sec=>wordSection[+s.dataset.i].includes(sec)));
+  if(pool.length===0){toast('No cards match — hide some words first');return;}
+  if(useCards) pool=pool.slice(0,cardLim);
+  document.querySelectorAll('span.word.revealed,span.word.anki-wrong').forEach(s=>{s.classList.remove('revealed','anki-wrong');s.classList.add('cloze');});
+  ankiQueue=pool;totalCards=pool.length;ankiPos=0;wrongList=[];correctCount=0;wrongCount=0;ankiPhase='reveal';ankiActive=false;sessionCardsUsed=0;
+  clearInterval(timerInterval);
+  if(useTime){
+    timerSecondsLeft=timeLim*60;document.getElementById('hudTimerWrap').style.display='flex';updateTimerDisplay();
+    timerInterval=setInterval(()=>{timerSecondsLeft--;updateTimerDisplay();if(timerSecondsLeft<=0){clearInterval(timerInterval);endSession("Time's up!");}},1000);
+  }else document.getElementById('hudTimerWrap').style.display='none';
+  remoteMode=true;document.getElementById('remoteBtn').textContent='⏹ Remote ON';document.getElementById('remoteBtn').classList.add('on');
+  document.getElementById('sessionHUD').style.display='block';closeModal();updateHUD();advanceToNext();
+}
+function stopSession(silent=false,keepRevealed=false){
+  remoteMode=false;clearInterval(timerInterval);
+  document.getElementById('remoteBtn').textContent='▶ Remote Off';document.getElementById('remoteBtn').classList.remove('on');
+  document.getElementById('sessionHUD').style.display='none';
+  if(!keepRevealed) document.querySelectorAll('span.word.revealed').forEach(s=>s.classList.replace('revealed','cloze'));
+  document.querySelectorAll('span.word.anki-wrong').forEach(s=>s.classList.remove('anki-wrong'));
+  if(!silent) toast('Session ended');
+}
+function toggleRemote(){if(remoteMode){pausedSession=null;stopSession();}else openModal();}
+
+function updateHUD(){
+  document.getElementById('hudRemain').textContent=Math.max(0,ankiQueue.length-ankiPos);
+  document.getElementById('hudGood').textContent=correctCount;document.getElementById('hudWrong').textContent=wrongCount;
+  document.getElementById('hudPhase').textContent=ankiPhase==='review'?'🔁 REVIEW — '+(wrongList.length+(ankiQueue.length-ankiPos))+' to go':'▶ REVEAL';
+}
+function updateTimerDisplay(){
+  const m=Math.floor(timerSecondsLeft/60).toString().padStart(2,'0');
+  const s=(timerSecondsLeft%60).toString().padStart(2,'0');
+  document.getElementById('hudTimer').textContent=m+':'+s;
+  document.getElementById('hudTimerWrap').style.color=timerSecondsLeft<=60?'#f87171':'#facc15';
+}
+function scrollToWord(el){el.scrollIntoView({behavior:'smooth',block:'center'});}
+function flashBorder(el,color){el.style.outline='3px solid '+color;setTimeout(()=>{el.style.outline='';},500);}
+function advanceToNext(){
+  while(ankiPos<ankiQueue.length){
+    const s=ankiQueue[ankiPos];
+    if(s.classList.contains('cloze')){scrollToWord(s);updateHUD();ankiActive=false;return;}
+    ankiPos++;
+  }
+  endOfPass();
+}
+function endOfPass(){
+  if(wrongList.length===0){
+    const pct=totalCards>0?Math.round(correctCount/(correctCount+wrongCount||1)*100):100;
+    endSession('✅ Done! '+correctCount+'✓ '+wrongCount+'✗ — '+pct+'%');return;
+  }
+  toast('Pass done — reviewing '+wrongList.length+' wrong');
+  ankiPhase='review';ankiQueue=[...wrongList];wrongList=[];ankiPos=0;ankiActive=false;
+  ankiQueue.forEach(s=>{s.classList.remove('revealed');s.classList.add('cloze');});
+  updateHUD();advanceToNext();
+}
+function endSession(msg){
+  clearInterval(timerInterval);saveState();toast(msg);
+  document.getElementById('hudPhase').textContent=msg;document.getElementById('hudRemain').textContent='—';
+  if(pausedSession) setTimeout(()=>{stopSession(true,true);resumePausedSession();},2000);
+  else setTimeout(()=>stopSession(false,true),2000);
+}
+function ankiSpace(){
+  if(!remoteMode) return;
+  const s=ankiQueue[ankiPos];if(!s) return;
+  if(!ankiActive){s.classList.replace('cloze','revealed');ankiActive=true;updateHUD();}
+  else{
+    flashBorder(s,'#22c55e');s.classList.remove('anki-wrong');
+    if(s.dataset.gid) persistentWrong.delete('g'+s.dataset.gid);else persistentWrong.delete(+s.dataset.i);
+    savePersistentWrong();correctCount++;sessionCardsUsed++;ankiPos++;ankiActive=false;updateHUD();setTimeout(advanceToNext,250);
+  }
+}
+function ankiWrong(){
+  if(!remoteMode) return;
+  const s=ankiQueue[ankiPos];if(!s) return;
+  if(!ankiActive){s.classList.replace('cloze','revealed');ankiActive=true;updateHUD();return;}
+  flashBorder(s,'#ef4444');s.classList.replace('revealed','cloze');s.classList.add('anki-wrong');wrongList.push(s);
+  if(s.dataset.gid) persistentWrong.add('g'+s.dataset.gid);else persistentWrong.add(+s.dataset.i);
+  savePersistentWrong();wrongCount++;sessionCardsUsed++;ankiPos++;ankiActive=false;updateHUD();setTimeout(advanceToNext,250);
+}
+document.addEventListener('keydown',e=>{
+  if(document.activeElement&&['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  if(e.key===' '||e.key==='0'||e.code==='Space'){e.preventDefault();ankiSpace();}
+  if(e.key==='1'){e.preventDefault();ankiWrong();}
+  if(e.key==='Escape'){closeModal();if(remoteMode)stopSession();selHint.style.display='none';}
+  if((e.key==='c'||e.key==='C')&&!e.ctrlKey&&!e.metaKey&&!remoteMode){
+    const sel=window.getSelection();if(!sel||sel.isCollapsed) return;
+    const range=sel.getRangeAt(0);const spansInSel=getWordSpansInRange(range);
+    if(spansInSel.length<2) return;
+    e.preventDefault();sel.removeAllRanges();selHint.style.display='none';
+    makeGroupCloze(spansInSel);toast('Grouped '+spansInSel.length+' words as one cloze');
+  }
+});
+function toast(msg){
+  const d=document.createElement('div');d.className='toast';d.textContent=msg;document.body.appendChild(d);
+  setTimeout(()=>{d.style.opacity='0';setTimeout(()=>d.remove(),400);},1600);
+}
+function saveState(){
+  const state={c:[],r:[],inSession:remoteMode};
+  document.querySelectorAll('span.word.cloze').forEach(s=>state.c.push(+s.dataset.i));
+  document.querySelectorAll('span.word.revealed').forEach(s=>state.r.push(+s.dataset.i));
+  if(!remoteMode){state.r.forEach(i=>state.c.push(i));state.r=[];}
+  try{localStorage.setItem('bp_cloze_v1',JSON.stringify(state));toast(remoteMode?'Session saved — resume anytime':'Saved!');}
+  catch(e){navigator.clipboard.writeText(JSON.stringify(state));toast('Copied to clipboard');}
+}
+function loadState(){
+  let json=null;try{json=localStorage.getItem('bp_cloze_v1');}catch(e){}
+  if(!json) json=prompt('Paste saved state JSON:');if(!json) return;
+  try{
+    const state=JSON.parse(json);restoreAll();
+    const map={};words.forEach(s=>{map[s.dataset.i]=s;});
+    (state.c||[]).forEach(i=>{if(map[i]) map[i].classList.add('cloze');});
+    if(state.inSession)(state.r||[]).forEach(i=>{if(map[i]) map[i].classList.add('revealed');});
+    else(state.r||[]).forEach(i=>{if(map[i]) map[i].classList.add('cloze');});
+    recalcN();toast(state.inSession&&(state.r||[]).length>0?'Loaded — session restored':'Loaded!');
+  }catch(e){alert('Invalid state.');}
+}
+try{
+  const saved=localStorage.getItem('bp_cloze_v1');
+  if(saved){
+    const state=JSON.parse(saved);const map={};words.forEach(s=>{map[s.dataset.i]=s;});
+    (state.c||[]).forEach(i=>{if(map[i]) map[i].classList.add('cloze');});
+    if(state.inSession)(state.r||[]).forEach(i=>{if(map[i]) map[i].classList.add('revealed');});
+    else(state.r||[]).forEach(i=>{if(map[i]) map[i].classList.add('cloze');});
+    recalcN();
+  }
+}catch(e){}
+loadPersistentWrong();
+function e_ankiGood(e){e.preventDefault();ankiSpace();}
+function e_ankiWrong(e){e.preventDefault();ankiWrong();}
+function updateTouchBtns(){const el=document.getElementById('touchBtns');if(el) el.classList.toggle('active',remoteMode);}
+new MutationObserver(()=>updateTouchBtns()).observe(document.getElementById('remoteBtn'),{characterData:true,childList:true,subtree:true,attributes:true});
+let lpTimer=null;const lpHint=document.getElementById('lpHint');
+function lpShow(msg){if(!lpHint) return;lpHint.textContent=msg;lpHint.style.display='block';clearTimeout(lpHint._hide);lpHint._hide=setTimeout(()=>{lpHint.style.display='none';},2200);}
+document.addEventListener('touchstart',e=>{
+  if(remoteMode) return;
+  lpTimer=setTimeout(()=>{
+    lpTimer=null;const sel=window.getSelection();
+    if(!sel||sel.isCollapsed||sel.toString().trim().length<2) return;
+    const range=sel.getRangeAt(0);const docEl=document.getElementById('doc');
+    if(!docEl||!docEl.contains(range.commonAncestorContainer)) return;
+    const spansInSel=getWordSpansInRange(range);
+    if(spansInSel.length<2){lpShow('Select at least 2 words to group');return;}
+    sel.removeAllRanges();if(selHint) selHint.style.display='none';
+    makeGroupCloze(spansInSel);lpShow('Grouped '+spansInSel.length+' words ✓');
+  },600);
+},{passive:true});
+document.addEventListener('touchend',()=>{clearTimeout(lpTimer);lpTimer=null;},{passive:true});
+document.addEventListener('touchmove',()=>{clearTimeout(lpTimer);lpTimer=null;},{passive:true});
+document.addEventListener('touchcancel',()=>{clearTimeout(lpTimer);lpTimer=null;},{passive:true});
+</script>
+</body>
+</html>
