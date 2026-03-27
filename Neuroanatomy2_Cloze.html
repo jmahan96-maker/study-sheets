@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Neuroanatomy Overview — Cloze Study Sheet</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+:root{--bg:#f5f4f0;--text:#111;--cloze:#111;--reveal-bg:#d1fae5;--reveal-fg:#065f46}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14.5px;line-height:1.8}
+.topbar{position:sticky;top:0;z-index:200;background:#111;display:flex;align-items:center;justify-content:space-between;padding:0 20px;min-height:52px;border-bottom:2px solid #222;gap:10px;flex-wrap:wrap}
+.topbar-left{display:flex;align-items:center;gap:14px}
+.topbar-title{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#aaa;white-space:nowrap}
+.counter{font-family:'IBM Plex Mono',monospace;font-size:12px;background:#222;color:#888;padding:4px 10px;border-radius:4px}
+.counter span{color:#facc15;font-weight:700}
+.topbar-right{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:6px 0}
+.hint{font-size:11px;color:#555;margin-right:4px}
+.btn{font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:6px 12px;border:none;border-radius:4px;cursor:pointer;transition:background .12s,transform .08s;white-space:nowrap}
+.btn:active{transform:scale(.96)}
+.btn-restore{background:#dc2626;color:#fff}.btn-restore:hover{background:#b91c1c}
+.btn-reveal{background:#065f46;color:#fff}.btn-reveal:hover{background:#064e3b}
+.btn-rehide{background:#374151;color:#fff}.btn-rehide:hover{background:#1f2937}
+.btn-save{background:#1d4ed8;color:#fff}.btn-save:hover{background:#1e40af}
+.btn-load{background:#6d28d9;color:#fff}.btn-load:hover{background:#5b21b6}
+.btn-remote{background:#374151;color:#fff}.btn-remote:hover{background:#1f2937}
+.btn-remote.on{background:#1d4ed8}.btn-remote.on:hover{background:#1e40af}
+.btn-wrong{background:#b45309;color:#fff}.btn-wrong:hover{background:#92400e}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.6);backdrop-filter:blur(2px);align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:12px;width:min(540px,94vw);max-height:90vh;overflow-y:auto;padding:28px 28px 24px;box-shadow:0 24px 48px rgba(0,0,0,.3)}
+.modal-title{font-size:17px;font-weight:700;color:#111;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #e5e7eb}
+.modal-section{margin-bottom:20px}
+.modal-label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#6b7280;margin-bottom:8px}
+.toggle-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.toggle-switch{position:relative;width:40px;height:22px;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;inset:0;background:#d1d5db;border-radius:11px;cursor:pointer;transition:background .2s}
+.toggle-slider:before{content:'';position:absolute;width:16px;height:16px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform .2s}
+.toggle-switch input:checked+.toggle-slider{background:#1d4ed8}
+.toggle-switch input:checked+.toggle-slider:before{transform:translateX(18px)}
+.toggle-desc{font-size:13px;color:#374151;font-weight:500}
+.toggle-sub{font-size:12px;color:#9ca3af;margin-top:2px}
+.section-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.section-chip{background:#f3f4f6;border:1.5px solid #e5e7eb;border-radius:6px;padding:7px 10px;cursor:pointer;font-size:12px;font-weight:600;color:#374151;transition:all .15s;user-select:none}
+.section-chip:hover{background:#dbeafe;border-color:#93c5fd;color:#1e3a8a}
+.section-chip.selected{background:#dbeafe;border-color:#1d4ed8;color:#1e3a8a}
+.num-input{display:flex;align-items:center;gap:8px;margin-top:8px}
+.num-input input[type=number]{width:80px;padding:6px 10px;border:1.5px solid #d1d5db;border-radius:6px;font-size:14px;font-family:inherit;color:#111;background:#fff}
+.num-input input[type=number]:focus{outline:none;border-color:#1d4ed8}
+.num-input label{font-size:13px;color:#6b7280}
+.modal-preview{background:#f0fdf4;border:1px solid #86efac;border-radius:6px;padding:10px 14px;font-size:12px;color:#166534;font-weight:600;margin-top:4px;min-height:32px}
+.modal-footer{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid #e5e7eb}
+.modal-btn{font-family:inherit;font-size:13px;font-weight:700;padding:9px 22px;border:none;border-radius:6px;cursor:pointer}
+.modal-btn-cancel{background:#f3f4f6;color:#374151}.modal-btn-cancel:hover{background:#e5e7eb}
+.modal-btn-start{background:#1d4ed8;color:#fff}.modal-btn-start:hover{background:#1e40af}
+.hud{display:none;position:fixed;top:60px;left:50%;transform:translateX(-50%);z-index:300;pointer-events:none;text-align:center;min-width:300px}
+.hud-phase{background:#1d4ed8;color:#fff;font-size:13px;font-weight:700;padding:7px 22px;border-radius:20px 20px 0 0;letter-spacing:.04em}
+.hud-stats{background:rgba(15,23,42,.88);color:#e2e8f0;font-size:12px;padding:5px 16px 6px;border-radius:0 0 12px 12px;display:flex;gap:14px;justify-content:center;align-items:center}
+.hud-stat{display:flex;flex-direction:column;align-items:center;gap:1px}
+.hud-stat .v{font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700}
+.hud-stat .k{font-size:9px;text-transform:uppercase;letter-spacing:.06em;opacity:.7}
+.hud-timer{color:#facc15}.hud-good{color:#4ade80}.hud-wrong{color:#f87171}.hud-remain{color:#93c5fd}
+.doc{max-width:920px;margin:0 auto;padding:36px 36px 96px}
+h1{font-size:20px;font-weight:700;margin:40px 0 10px;padding-bottom:7px;border-bottom:3px solid #00466B;color:#00466B}
+h2{font-size:15px;font-weight:700;margin:22px 0 6px;color:#0070C0}
+h3{font-size:13px;font-weight:700;margin:16px 0 5px;text-transform:uppercase;letter-spacing:.06em;color:#374151}
+p{margin:4px 0 6px}
+p.warn{color:#C00000;font-weight:700;background:#fff5f5;border-left:3px solid #C00000;padding:8px 14px;border-radius:0 6px 6px 0;margin:8px 0}
+p.tip{color:#375623;background:#f0fff4;border-left:3px solid #375623;padding:8px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-weight:600}
+ul{margin:4px 0 8px 0;padding:0;list-style:none}
+ul li{position:relative;padding-left:20px;margin:3px 0;line-height:1.75}
+ul li::before{content:"•";position:absolute;left:4px;color:#374151;font-weight:700}
+ul ul{margin:2px 0 4px 0}ul ul li::before{content:"–";color:#9ca3af;font-weight:400;left:4px}
+.tbl-wrap{overflow-x:auto;margin:14px 0 18px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:#00466B;color:#fff;padding:9px 13px;text-align:left;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+th[style]{background:revert;color:revert;text-transform:revert;letter-spacing:revert}
+td{padding:8px 13px;border:1px solid #ddd;vertical-align:top}
+tr:nth-child(even) td{background:#f7f6f2}
+.group-cloze{display:inline;border-radius:3px;cursor:pointer}
+.group-cloze.cloze{background:#111;color:#111;user-select:none}
+.group-cloze.cloze span.word{background:#111!important;color:#111!important;pointer-events:none}
+.group-cloze.cloze:hover,.group-cloze.cloze:hover span.word{background:#333!important;color:#333!important}
+.group-cloze.revealed{background:var(--reveal-bg);color:var(--reveal-fg);font-weight:700}
+.group-cloze.revealed span.word{background:transparent!important;color:inherit!important;font-weight:700;pointer-events:none}
+.group-cloze.revealed:hover{background:#a7f3d0}
+span.word{cursor:pointer;border-radius:3px;padding:1px 1px;margin:0 -1px;transition:background .1s;display:inline}
+span.word:hover{background:#dbeafe;color:#1e3a8a}
+span.word.cloze{background:var(--cloze);color:var(--cloze);border-radius:3px;cursor:pointer;user-select:none;min-width:1.5ch;display:inline-block}
+span.word.cloze:hover{background:#333;color:#333}
+span.word.revealed{background:var(--reveal-bg);color:var(--reveal-fg);font-weight:700;cursor:pointer;border-radius:3px}
+span.word.revealed:hover{background:#a7f3d0}
+span.word.anki-wrong{background:#fee2e2;color:#991b1b;border-radius:3px;font-weight:700}
+span.word.range-start{outline:2px solid #1d4ed8;border-radius:3px;background:#dbeafe!important;color:#1e3a8a!important}
+span.word.range-preview{background:#bfdbfe!important;color:#1e3a8a!important;border-radius:3px}
+th span.word.revealed{color:var(--reveal-fg)}
+#selHint{display:none;position:absolute;background:#1d4ed8;color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:6px;pointer-events:none;z-index:9999;letter-spacing:.04em;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.info{position:fixed;bottom:0;left:0;right:0;background:#0f172a;border-top:1px solid #1e40af;padding:7px 24px;font-size:11px;color:#94a3b8;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.info b{color:#e2e8f0;font-weight:700}
+.toast{position:fixed;top:64px;right:20px;background:#065f46;color:#fff;padding:8px 18px;border-radius:6px;font-size:13px;font-weight:700;z-index:9999;pointer-events:none;transition:opacity .4s}
+.touch-btns{display:none;position:fixed;bottom:44px;left:50%;transform:translateX(-50%);z-index:250;gap:16px;flex-direction:row}
+.touch-btns.active{display:flex}
+.touch-btn{font-family:'IBM Plex Sans',sans-serif;font-size:15px;font-weight:700;width:130px;height:54px;border:none;border-radius:14px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:transform .1s;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.touch-btn:active{transform:scale(.94)}
+.touch-btn-good{background:#22c55e;color:#fff}.touch-btn-wrong{background:#ef4444;color:#fff}
+#lpHint{display:none;position:fixed;bottom:112px;left:50%;transform:translateX(-50%);background:#1d4ed8;color:#fff;font-size:13px;font-weight:700;padding:8px 18px;border-radius:20px;z-index:9999;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,.3);white-space:nowrap}
+@media print{.topbar,.info{display:none}.doc{padding:20px}span.word.cloze{background:#000!important;color:#000!important}}</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-title">Neuroanatomy Overview</div>
+    <div class="counter">Hidden: <span id="cnt">0</span></div>
+  </div>
+  <div class="topbar-right">
+    <span class="hint">Click any word to hide</span>
+    <button class="btn btn-remote" id="remoteBtn" onclick="toggleRemote()">&#9654; Remote Off</button>
+    <button class="btn btn-wrong" id="wrongBtn" onclick="reviewWrong()" style="display:none">&#10007; Review Wrong (<span id="wrongBadge">0</span>)</button>
+    <button class="btn btn-rehide" onclick="rehideAll()">Re-hide All</button>
+    <button class="btn btn-reveal" onclick="revealAll()">Reveal All</button>
+    <button class="btn btn-restore" onclick="restoreAll()">Restore All</button>
+    <button class="btn btn-save" onclick="saveState()">Save</button>
+    <button class="btn btn-load" onclick="loadState()">Load</button>
+  </div>
+</div>
+<div class="modal-overlay" id="sessionModal">
+  <div class="modal">
+    <div class="modal-title">⚙ Configure Study Session</div>
+    <div class="modal-section">
+      <div class="modal-label">Section filter</div>
+      <div class="toggle-row"><label class="toggle-switch"><input type="checkbox" id="useSections" onchange="updatePreview()"><span class="toggle-slider"></span></label><div><div class="toggle-desc">Limit to specific sections</div><div class="toggle-sub">Only clozes inside selected sections will be queued</div></div></div>
+      <div class="section-grid" id="sectionGrid">        <div class="section-chip" data-sec="__ALL__" onclick="toggleAll(this)" style="grid-column:1/-1;background:#f0f4ff;border-color:#93c5fd;color:#1e3a8a;text-align:center;">⬛ Whole Document</div>
+        <div class="section-chip" data-sec="1. WHAT IS A NEURON?" onclick="toggleChip(this)">WHAT IS A NEURON?</div>
+        <div class="section-chip" data-sec="2. PERIPHERAL NERVES & CONNECTIVE TISSUE" onclick="toggleChip(this)">PERIPHERAL NERVES & CONNECTIVE TIS…</div>
+        <div class="section-chip" data-sec="3. NERVOUS SYSTEM OVERVIEW" onclick="toggleChip(this)">NERVOUS SYSTEM OVERVIEW</div>
+        <div class="section-chip" data-sec="4. SPINAL NERVES & ROOTS" onclick="toggleChip(this)">SPINAL NERVES & ROOTS</div>
+        <div class="section-chip" data-sec="5. DERMATOMES, MYOTOMES & OSTEOTOMES" onclick="toggleChip(this)">DERMATOMES, MYOTOMES & OSTEOTOMES</div>
+        <div class="section-chip" data-sec="6. NERVE PLEXUSES" onclick="toggleChip(this)">NERVE PLEXUSES</div>
+        <div class="section-chip" data-sec="7. AUTONOMIC INNERVATION" onclick="toggleChip(this)">AUTONOMIC INNERVATION</div>
+</div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-label">Time box</div>
+      <div class="toggle-row"><label class="toggle-switch"><input type="checkbox" id="useTime" onchange="updatePreview()"><span class="toggle-slider"></span></label><div><div class="toggle-desc">Stop after a time limit</div><div class="toggle-sub">Auto-saves on expiry</div></div></div>
+      <div class="num-input"><input type="number" id="timeLimit" value="20" min="1" max="180" oninput="updatePreview()"><label>minutes</label></div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-label">Card limit</div>
+      <div class="toggle-row"><label class="toggle-switch"><input type="checkbox" id="useCards" onchange="updatePreview()"><span class="toggle-slider"></span></label><div><div class="toggle-desc">Stop after N cards</div><div class="toggle-sub">Picks up where you left off next session</div></div></div>
+      <div class="num-input"><input type="number" id="cardLimit" value="25" min="1" max="500" oninput="updatePreview()"><label>cards</label></div>
+    </div>
+    <div class="modal-preview" id="sessionPreview">Loading preview…</div>
+    <div class="modal-footer"><button class="modal-btn modal-btn-cancel" onclick="closeModal()">Cancel</button><button class="modal-btn modal-btn-start" onclick="startSession()">Start Session ▶</button></div>
+  </div>
+</div>
+<div class="hud" id="sessionHUD">
+  <div class="hud-phase" id="hudPhase">▶ REVEAL</div>
+  <div class="hud-stats">
+    <div class="hud-stat hud-remain"><span class="v" id="hudRemain">0</span><span class="k">Left</span></div>
+    <div class="hud-stat hud-good"><span class="v" id="hudGood">0</span><span class="k">Good</span></div>
+    <div class="hud-stat hud-wrong"><span class="v" id="hudWrong">0</span><span class="k">Wrong</span></div>
+    <div class="hud-stat hud-timer" id="hudTimerWrap" style="display:none"><span class="v" id="hudTimer">--:--</span><span class="k">Time</span></div>
+  </div>
+</div>
+<div class="touch-btns" id="touchBtns">
+  <button class="touch-btn touch-btn-wrong" ontouchend="e_ankiWrong(event)" onclick="ankiWrong()">✗ Wrong</button>
+  <button class="touch-btn touch-btn-good"  ontouchend="e_ankiGood(event)"  onclick="ankiSpace()">✓ Good</button>
+</div>
+<div id="lpHint"></div>
+<div id="selHint">Press C to group as one cloze</div>
+<div class="doc" id="doc"><p style="text-align:center"><span style="color:#00466e;font-size:32px;font-weight:700"><span class="word">NEUROANATOMY</span> <span class="word">OVERVIEW</span></span></p>
+<p style="text-align:center"><span style="color:#0070c0;font-size:24px;font-weight:700"><span class="word">BRIEFING</span> <span class="word">DOCUMENT</span></span></p>
+<p><span style="color:#00466e;font-size:20px;font-weight:700"><span class="word">⭐</span> <span class="word">HIGH-YIELD</span> <span class="word">CRNA</span> <span class="word">BOARD</span> <span class="word">SUMMARY</span></span></p>
+<p><span style="color:#555555;font-size:13px;font-style:italic"><span class="word">Most</span> <span class="word">testable</span> <span class="word">facts</span> <span class="word">for</span> <span class="word">CRNA</span> <span class="word">boards</span> <span class="word">—</span> <span class="word">review</span> <span class="word">before</span> <span class="word">exam.</span></span></p>
+<div class="tbl-wrap"><table>
+<tr>
+<th style="background:#00466e;color:#fff"><span style="color:#ffffff;font-size:13px;font-weight:700"><span class="word">TOPIC</span></span></th>
+<th style="background:#00466e;color:#fff"><span style="color:#ffffff;font-size:13px;font-weight:700"><span class="word">HIGH-YIELD</span> <span class="word">FACT</span></span></th>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Neuron</span> <span class="word">basics</span></span></td>
+<td><span style="font-size:12px"><span class="word">Basic</span> <span class="word">functional</span> <span class="word">unit;</span> <span class="word">cell</span> <span class="word">body</span> <span class="word">(soma)</span> <span class="word">+</span> <span class="word">dendrites</span> <span class="word">(receive)</span> <span class="word">+</span> <span class="word">axons</span> <span class="word">(conduct);</span> <span class="word">longest</span> <span class="word">cells</span> <span class="word">in</span> <span class="word">body;</span> <span class="word">LIMITED</span> <span class="word">repair</span> <span class="word">ability</span> <span class="word">after</span> <span class="word">injury</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Spinal</span> <span class="word">cord</span> <span class="word">termination</span></span></td>
+<td><span style="font-size:12px"><span class="word">Conus</span> <span class="word">medullaris</span> <span class="word">terminates</span> <span class="word">at</span> <span class="word">L1–L2</span> <span class="word">in</span> <span class="word">adults;</span> <span class="word">below</span> <span class="word">=</span> <span class="word">cauda</span> <span class="word">equina</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Cauda</span> <span class="word">equina</span></span></td>
+<td><span style="font-size:12px"><span class="word">Roots</span> <span class="word">below</span> <span class="word">L1–L2</span> <span class="word">that</span> <span class="word">must</span> <span class="word">descend</span> <span class="word">through</span> <span class="word">vertebral</span> <span class="word">canal</span> <span class="word">before</span> <span class="word">exiting;</span> <span class="word">basis</span> <span class="word">for</span> <span class="word">spinal</span> <span class="word">anesthesia</span> <span class="word">safety</span> <span class="word">below</span> <span class="word">L2</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Spinal</span> <span class="word">nerve</span> <span class="word">count</span></span></td>
+<td><span style="font-size:12px"><span class="word">31</span> <span class="word">pairs</span> <span class="word">total:</span> <span class="word">8</span> <span class="word">cervical</span> <span class="word">/</span> <span class="word">12</span> <span class="word">thoracic</span> <span class="word">/</span> <span class="word">5</span> <span class="word">lumbar</span> <span class="word">/</span> <span class="word">5</span> <span class="word">sacral</span> <span class="word">/</span> <span class="word">1</span> <span class="word">coccygeal</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">8</span> <span class="word">cervical</span> <span class="word">nerves</span></span></td>
+<td><span style="font-size:12px"><span class="word">7</span> <span class="word">cervical</span> <span class="word">vertebrae</span> <span class="word">but</span> <span class="word">8</span> <span class="word">cervical</span> <span class="word">nerves</span> <span class="word">—</span> <span class="word">C1</span> <span class="word">exits</span> <span class="word">ABOVE</span> <span class="word">C1</span> <span class="word">vertebra</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Dermatome</span> <span class="word">vs.</span> <span class="word">myotome</span></span></td>
+<td><span style="font-size:12px"><span class="word">Dermatome</span> <span class="word">=</span> <span class="word">sensory</span> <span class="word">via</span> <span class="word">DORSAL</span> <span class="word">root;</span> <span class="word">myotome</span> <span class="word">=</span> <span class="word">motor</span> <span class="word">via</span> <span class="word">VENTRAL</span> <span class="word">root;</span> <span class="word">C1</span> <span class="word">has</span> <span class="word">NO</span> <span class="word">sensory</span> <span class="word">dermatome</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Blood-nerve</span> <span class="word">barrier</span></span></td>
+<td><span style="font-size:12px"><span class="word">Perineurium</span> <span class="word">(squamous</span> <span class="word">epithelial</span> <span class="word">sheath</span> <span class="word">around</span> <span class="word">fascicles)</span> <span class="word">=</span> <span class="word">blood-nerve</span> <span class="word">barrier</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Connective</span> <span class="word">tissue</span> <span class="word">layers</span></span></td>
+<td><span style="font-size:12px"><span class="word">Endoneurium</span> <span class="word">(each</span> <span class="word">axon)</span> <span class="word">→</span> <span class="word">Perineurium</span> <span class="word">(fascicle)</span> <span class="word">→</span> <span class="word">Epineurium</span> <span class="word">(whole</span> <span class="word">nerve)</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Fascicle</span> <span class="word">anatomy</span></span></td>
+<td><span style="font-size:12px"><span class="word">NOT</span> <span class="word">continuous</span> <span class="word">—</span> <span class="word">divide</span> <span class="word">&</span> <span class="word">anastomose</span> <span class="word">throughout</span> <span class="word">nerve;</span> <span class="word">explains</span> <span class="word">nerve</span> <span class="word">injury</span> <span class="word">patterns</span> <span class="word">&</span> <span class="word">intraneural</span> <span class="word">injection</span> <span class="word">risks</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">DRG</span> <span class="word">location</span></span></td>
+<td><span style="font-size:12px"><span class="word">Dorsal</span> <span class="word">Root</span> <span class="word">Ganglion:</span> <span class="word">sensory</span> <span class="word">cell</span> <span class="word">bodies</span> <span class="word">OUTSIDE</span> <span class="word">spinal</span> <span class="word">cord</span> <span class="word">on</span> <span class="word">dorsal</span> <span class="word">root</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Sensory</span> <span class="word">vs.</span> <span class="word">motor</span> <span class="word">roots</span></span></td>
+<td><span style="font-size:12px"><span class="word">DORSAL</span> <span class="word">=</span> <span class="word">sensory</span> <span class="word">(afferent</span> <span class="word">ARRIVES);</span> <span class="word">VENTRAL</span> <span class="word">=</span> <span class="word">motor</span> <span class="word">(efferent</span> <span class="word">EXITS)</span> <span class="word">—</span> <span class="word">mnemonic:</span> <span class="word">DAVE</span> <span class="word">(Dorsal</span> <span class="word">Afferent,</span> <span class="word">Ventral</span> <span class="word">Efferent)</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Rami</span></span></td>
+<td><span style="font-size:12px"><span class="word">Both</span> <span class="word">dorsal</span> <span class="word">&</span> <span class="word">ventral</span> <span class="word">rami</span> <span class="word">carry</span> <span class="word">BOTH</span> <span class="word">sensory</span> <span class="word">&</span> <span class="word">motor</span> <span class="word">fibers;</span> <span class="word">ALL</span> <span class="word">nerve</span> <span class="word">plexuses</span> <span class="word">are</span> <span class="word">on</span> <span class="word">VENTRAL</span> <span class="word">rami</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Phrenic</span> <span class="word">nerve</span></span></td>
+<td><span style="font-size:12px"><span class="word">C3–C5</span> <span class="word">("C3,</span> <span class="word">4,</span> <span class="word">5</span> <span class="word">keeps</span> <span class="word">the</span> <span class="word">diaphragm</span> <span class="word">alive");</span> <span class="word">part</span> <span class="word">of</span> <span class="word">cervical</span> <span class="word">plexus</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Brachial</span> <span class="word">plexus</span> <span class="word">roots</span></span></td>
+<td><span style="font-size:12px"><span class="word">C5–T1</span> <span class="word">(ventral</span> <span class="word">rami);</span> <span class="word">innervates</span> <span class="word">entire</span> <span class="word">upper</span> <span class="word">extremity</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Lumbar</span> <span class="word">plexus</span> <span class="word">roots</span></span></td>
+<td><span style="font-size:12px;font-weight:700"><span class="word">L1–L3</span></span><span style="font-size:12px"> <span class="word">+</span> <span class="word">upper</span> </span><span style="font-size:12px;font-weight:700"><span class="word">L4</span> </span><span style="font-size:12px"><span class="word">(±T12</span> <span class="word">in</span> <span class="word">~50%);</span> <span class="word">key</span> <span class="word">branches:</span> <span class="word">femoral,</span> <span class="word">obturator,</span> <span class="word">lateral</span> <span class="word">femoral</span> <span class="word">cutaneous,</span> <span class="word">ilioinguinal</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Sacral</span> <span class="word">plexus</span> <span class="word">roots</span></span></td>
+<td><span style="font-size:12px"><span class="word">Lumbosacral</span> <span class="word">trunk</span> <span class="word">(</span></span><span style="font-size:12px;font-weight:700"><span class="word">L4–L5</span></span><span style="font-size:12px"><span class="word">)</span> <span class="word">+</span> </span><span style="font-size:12px;font-weight:700"><span class="word">S1–S4</span></span><span style="font-size:12px"><span class="word">;</span> <span class="word">Sciatic</span> <span class="word">nerve</span> <span class="word">(L4–S2)</span> <span class="word">→</span> <span class="word">common</span> <span class="word">peroneal</span> <span class="word">+</span> <span class="word">tibial;</span> <span class="word">Pudendal</span> <span class="word">nerve</span> <span class="word">(S2–S4)</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Sympathetic</span> <span class="word">('thoracolumbar')</span></span></td>
+<td><span style="font-size:12px;font-weight:700"><span class="word">T1–L2;</span></span><span style="font-size:12px"> <span class="word">preganglionic</span> <span class="word">→</span> <span class="word">white</span> <span class="word">rami</span> <span class="word">communicans</span> <span class="word">→</span> <span class="word">sympathetic</span> <span class="word">trunk</span> <span class="word">(paravertebral</span> <span class="word">ganglia</span> <span class="word">adjacent</span> <span class="word">to</span> <span class="word">vertebral</span> <span class="word">bodies)</span> <span class="word">→</span> <span class="word">gray</span> <span class="word">rami</span> <span class="word">→</span> <span class="word">destination</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Parasympathetic</span> <span class="word">('craniosacral')</span></span></td>
+<td><span style="font-size:12px;font-weight:700"><span class="word">Cranial</span> <span class="word">nerves</span> <span class="word">+</span> <span class="word">S2–S4</span></span><span style="font-size:12px"><span class="word">;</span> <span class="word">S2–S4</span> <span class="word">via</span> <span class="word">ventral</span> <span class="word">roots</span> <span class="word">→</span> <span class="word">ventral</span> <span class="word">rami</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Ganglion</span> <span class="word">definition</span></span></td>
+<td><span style="font-size:12px"><span class="word">Collection</span> <span class="word">of</span> </span><span style="font-size:12px;font-weight:700"><span class="word">cell</span> <span class="word">bodies</span> <span class="word">OUTSIDE</span> <span class="word">the</span> <span class="word">spinal</span> <span class="word">cord</span> </span><span style="font-size:12px"><span class="word">(vs.</span> <span class="word">nucleus</span> <span class="word">=</span> <span class="word">cell</span> <span class="word">bodies</span> <span class="word">INSIDE</span> <span class="word">CNS)</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Interneurons</span></span></td>
+<td><span style="font-size:12px"><span class="word">Responsible</span> <span class="word">for</span> </span><span style="font-size:12px;font-weight:700"><span class="word">reflexes</span></span><span style="font-size:12px"> <span class="word">(from</span> <span class="word">presenter</span> <span class="word">notes)</span></span></td>
+</tr>
+<tr>
+<td style="background:#d6e4f0"><span style="color:#00466e;font-size:12px;font-weight:700"><span class="word">Intraneural</span> <span class="word">injection</span> <span class="word">risk</span></span></td>
+<td><span style="font-size:12px"><span class="word">Fascicle</span> <span class="word">anatomy</span> <span class="word">(anastomotic,</span> <span class="word">non-continuous)</span> <span class="word">makes</span> <span class="word">intraneural</span> <span class="word">injection</span> <span class="word">especially</span> <span class="word">dangerous</span></span></td>
+</tr>
+</table></div>
+<h1><span style="color:#00466e;font-size:20px;font-weight:700"><span class="word">1.</span> <span class="word">WHAT</span> <span class="word">IS</span> <span class="word">A</span> <span class="word">NEURON?</span></span></h1>
+<h1><span style="color:#00466e;font-size:20px;font-weight:700"><span class="word">2.</span> <span class="word">PERIPHERAL</span> <span class="word">NERVES</span> <span class="word">&</span> <span class="word">CONNECTIVE</span> <span class="word">TISSUE</span></span></h1>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Nerve</span> <span class="word">Composition</span></span></h2>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Three</span> <span class="word">Connective</span> <span class="word">Tissue</span> <span class="word">Compartments</span></span></h2>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Fascicle</span> <span class="word">Bundles</span> <span class="word">—</span> <span class="word">Clinical</span> <span class="word">Implications</span></span></h2>
+<h1><span style="color:#00466e;font-size:20px;font-weight:700"><span class="word">3.</span> <span class="word">NERVOUS</span> <span class="word">SYSTEM</span> <span class="word">OVERVIEW</span></span></h1>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">CNS</span> <span class="word">vs.</span> <span class="word">PNS</span></span></h2>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Ganglion</span> <span class="word">vs.</span> <span class="word">Nucleus</span></span></h2>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Spinal</span> <span class="word">Cord</span> <span class="word">Anatomy</span></span></h2>
+<h1><span style="color:#00466e;font-size:20px;font-weight:700"><span class="word">4.</span> <span class="word">SPINAL</span> <span class="word">NERVES</span> <span class="word">&</span> <span class="word">ROOTS</span></span></h1>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Composition</span></span></h2>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Mnemonics</span> <span class="word">(Board-Favorite)</span></span></h2>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Interneurons</span></span></h2>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Dorsal</span> <span class="word">&</span> <span class="word">Ventral</span> <span class="word">Rami</span></span></h2>
+<p class="warn"><span style="color:#c00000;font-size:13px;font-weight:700"><span class="word">All</span> <span class="word">nerve</span> <span class="word">plexuses</span> <span class="word">are</span> <span class="word">found</span> <span class="word">on</span> <span class="word">VENTRAL</span> <span class="word">rami</span></span></p>
+<h1><span style="color:#00466e;font-size:20px;font-weight:700"><span class="word">5.</span> <span class="word">DERMATOMES,</span> <span class="word">MYOTOMES</span> <span class="word">&</span> <span class="word">OSTEOTOMES</span></span></h1>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Dermatomes</span></span></h2>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Myotomes</span></span></h2>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Osteotomes</span></span></h2>
+<h1><span style="color:#00466e;font-size:20px;font-weight:700"><span class="word">6.</span> <span class="word">NERVE</span> <span class="word">PLEXUSES</span></span></h1>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Cervical</span> <span class="word">Plexus</span> <span class="word">(C1–C5)</span></span></h2>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Brachial</span> <span class="word">Plexus</span> <span class="word">(C5–T1)</span></span></h2>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Lumbar</span> <span class="word">Plexus</span> <span class="word">(L1–L3</span> <span class="word">+</span> <span class="word">upper</span> <span class="word">L4)</span></span></h2>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Sacral</span> <span class="word">Plexus</span> <span class="word">(L4–S4)</span></span></h2>
+<h1><span style="color:#00466e;font-size:20px;font-weight:700"><span class="word">7.</span> <span class="word">AUTONOMIC</span> <span class="word">INNERVATION</span></span></h1>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Sympathetic</span> <span class="word">Division</span> <span class="word">—</span> <span class="word">"Thoracolumbar"</span> <span class="word">(T1–L2)</span></span></h2>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Parasympathetic</span> <span class="word">Division</span> <span class="word">—</span> <span class="word">"Craniosacral"</span></span></h2>
+<h2><span style="color:#0070c0;font-size:16px;font-weight:700"><span class="word">Key</span> <span class="word">ANS</span> <span class="word">Comparison</span></span></h2>
+<div class="tbl-wrap"><table>
+<tr>
+<th style="background:#00466e;color:#fff">&nbsp;</th>
+<th style="background:#00466e;color:#fff"><span style="color:#ffffff;font-size:12px;font-weight:700"><span class="word">SYMPATHETIC</span></span></th>
+<th style="background:#00466e;color:#fff"><span style="color:#ffffff;font-size:12px;font-weight:700"><span class="word">PARASYMPATHETIC</span></span></th>
+</tr>
+<tr>
+<td style="background:#eaf0f6"><span style="font-size:12px"><span class="word">Origin</span></span></td>
+<td><span style="font-size:12px"><span class="word">T1–L2</span> <span class="word">(Thoracolumbar)</span></span></td>
+<td><span style="font-size:12px"><span class="word">Cranial</span> <span class="word">nerves</span> <span class="word">+</span> <span class="word">S2–S4</span> <span class="word">(Craniosacral)</span></span></td>
+</tr>
+<tr>
+<td style="background:#eaf0f6"><span style="font-size:12px"><span class="word">Preganglionic</span> <span class="word">fiber</span> <span class="word">length</span></span></td>
+<td><span style="font-size:12px"><span class="word">Short</span></span></td>
+<td><span style="font-size:12px"><span class="word">Long</span></span></td>
+</tr>
+<tr>
+<td style="background:#eaf0f6"><span style="font-size:12px"><span class="word">Postganglionic</span> <span class="word">fiber</span> <span class="word">length</span></span></td>
+<td><span style="font-size:12px"><span class="word">Long</span></span></td>
+<td><span style="font-size:12px"><span class="word">Short</span></span></td>
+</tr>
+<tr>
+<td style="background:#eaf0f6"><span style="font-size:12px"><span class="word">Ganglia</span> <span class="word">location</span></span></td>
+<td><span style="font-size:12px"><span class="word">Paravertebral</span> <span class="word">(adjacent</span> <span class="word">to</span> <span class="word">vertebral</span> <span class="word">bodies)</span></span></td>
+<td><span style="font-size:12px"><span class="word">Near/within</span> <span class="word">target</span> <span class="word">organ</span></span></td>
+</tr>
+<tr>
+<td style="background:#eaf0f6"><span style="font-size:12px"><span class="word">Neurotransmitter</span> <span class="word">(pre)</span></span></td>
+<td><span style="font-size:12px"><span class="word">Acetylcholine</span></span></td>
+<td><span style="font-size:12px"><span class="word">Acetylcholine</span></span></td>
+</tr>
+<tr>
+<td style="background:#eaf0f6"><span style="font-size:12px"><span class="word">Neurotransmitter</span> <span class="word">(post)</span></span></td>
+<td><span style="font-size:12px"><span class="word">Norepinephrine</span></span></td>
+<td><span style="font-size:12px"><span class="word">Acetylcholine</span></span></td>
+</tr>
+</table></div>
+<p style="text-align:center"><span style="color:#00466e;font-size:15px;font-weight:700"><span class="word">A</span> <span class="word">thorough</span> <span class="word">understanding</span> <span class="word">of</span> <span class="word">neuroanatomy</span> <span class="word">is</span> <span class="word">REQUIRED</span> <span class="word">to</span> <span class="word">master</span> <span class="word">regional</span> <span class="word">anesthesia.</span></span></p>
+<p style="text-align:center"><span style="color:#777777;font-size:12px;font-style:italic"><span class="word">Review</span> <span class="word">Apex:</span> <span class="word">ANS</span> <span class="word">Anatomy</span> <span class="word">&</span> <span class="word">Physiology</span> <span class="word">|</span> <span class="word">Review</span> <span class="word">Apex:</span> <span class="word">Block</span> <span class="word">sections</span> <span class="word">for</span> <span class="word">upcoming</span> <span class="word">lectures</span> <span class="word">|</span> <span class="word">Compare</span> <span class="word">and</span> <span class="word">Contrast!</span> <span class="word">Know</span> <span class="word">the</span> <span class="word">definitions!</span></span></p>
+<p style="text-align:center"><span style="color:#555555;font-size:12px"><span class="word">Contact:</span> <span class="word">caltuna@fairfield.edu</span></span></p></div>
+<div class="info">
+  <span><b>Click</b> = hide/reveal</span>
+  <span><b>Double-click</b> = undo</span>
+  <span><b>Select+C / tap first+last</b> = group</span>
+  <span><b>Remote ON:</b> Space/0 = good | 1 = wrong</span>
+</div>
+<script>
+let n=0,remoteMode=false,groupCounter=0,pausedSession=null,rangeStart=null;
+let ankiQueue=[],ankiPos=0,wrongList=[],ankiActive=false,ankiPhase='reveal';
+let correctCount=0,wrongCount=0,totalCards=0,sessionCardsUsed=0;
+let timerInterval=null,timerSecondsLeft=0;
+let persistentWrong=new Set();
+const cnt=document.getElementById('cnt');
+const words=Array.from(document.querySelectorAll('span.word'));
+words.forEach((s,i)=>{s.dataset.i=i;});
+const wordSection=new Array(words.length).fill('');
+(function(){const kids=Array.from(document.getElementById('doc').querySelectorAll('h1,span.word'));let cur='';kids.forEach(el=>{if(el.tagName==='H1')cur=el.textContent.trim();else{const i=+el.dataset.i;if(!isNaN(i))wordSection[i]=cur;}});})();
+function recalcN(){const indiv=document.querySelectorAll('span.word.cloze:not(.group-cloze span.word)').length;const groups=document.querySelectorAll('.group-cloze.cloze').length;n=indiv+groups;cnt.textContent=n;return n;}
+function buildClozePool(filterFn){const pool=[];words.forEach(s=>{if(s.classList.contains('cloze')&&!s.closest('.group-cloze'))if(!filterFn||filterFn(s))pool.push(s);});document.querySelectorAll('.group-cloze.cloze').forEach(g=>{const fw=g.querySelector('span.word');if(!fw)return;if(!filterFn||filterFn(fw))pool.push(g);});pool.sort((a,b)=>a.compareDocumentPosition(b)&4?-1:1);return pool;}
+function clearRangeStart(){if(rangeStart){rangeStart.classList.remove('range-start');rangeStart=null;}document.querySelectorAll('span.word.range-preview').forEach(s=>s.classList.remove('range-preview'));}
+function getWordsBetween(a,b){const all=Array.from(document.getElementById('doc').querySelectorAll('span.word:not(.group-cloze span.word)'));const ia=all.indexOf(a),ib=all.indexOf(b);if(ia<0||ib<0)return[];return all.slice(Math.min(ia,ib),Math.max(ia,ib)+1);}
+function makeGroupCloze(spanEls){if(!spanEls.length)return;const parent=spanEls[0].parentNode;const wrapper=document.createElement('span');wrapper.className='group-cloze cloze';wrapper.dataset.gid=++groupCounter;parent.insertBefore(wrapper,spanEls[0]);const lastSpan=spanEls[spanEls.length-1];const toMove=[];let node=spanEls[0];while(node&&node!==lastSpan.nextSibling){toMove.push(node);node=node.nextSibling;}toMove.forEach(nd=>wrapper.appendChild(nd));wrapper.addEventListener('click',e=>{e.stopPropagation();if(remoteMode)return;if(wrapper.classList.contains('revealed'))wrapper.classList.replace('revealed','cloze');else if(wrapper.classList.contains('cloze'))wrapper.classList.replace('cloze','revealed');});wrapper.addEventListener('dblclick',e=>{e.preventDefault();e.stopPropagation();if(remoteMode)return;dissolveGroup(wrapper);recalcN();toast('Group dissolved');});recalcN();}
+function dissolveGroup(wrapper){const parent=wrapper.parentNode;while(wrapper.firstChild){if(wrapper.firstChild.classList&&wrapper.firstChild.classList.contains('word'))wrapper.firstChild.style.pointerEvents='';parent.insertBefore(wrapper.firstChild,wrapper);}parent.removeChild(wrapper);}
+const selHint=document.getElementById('selHint');
+document.addEventListener('selectionchange',()=>{if(remoteMode){selHint.style.display='none';return;}const sel=window.getSelection();if(!sel||sel.isCollapsed||sel.toString().trim().length<2){selHint.style.display='none';return;}const range=sel.getRangeAt(0);const docEl=document.getElementById('doc');if(!docEl.contains(range.commonAncestorContainer)){selHint.style.display='none';return;}const spansInSel=getWordSpansInRange(range);if(spansInSel.length<2){selHint.style.display='none';return;}const rect=range.getBoundingClientRect();selHint.style.display='block';selHint.style.left=Math.min(rect.left,window.innerWidth-220)+'px';selHint.style.top=(rect.bottom+window.scrollY+6)+'px';selHint.textContent='Press C to group '+spansInSel.length+' words as one cloze';});
+function getWordSpansInRange(range){return Array.from(document.getElementById('doc').querySelectorAll('span.word')).filter(s=>{if(s.closest('.group-cloze'))return false;try{const r=document.createRange();r.selectNode(s);return range.compareBoundaryPoints(Range.END_TO_START,r)<0&&range.compareBoundaryPoints(Range.START_TO_END,r)>0;}catch(e){return false;}});}
+words.forEach(s=>{
+  s.addEventListener('click',e=>{e.stopPropagation();if(remoteMode||s.closest('.group-cloze'))return;if(rangeStart&&rangeStart!==s){const between=getWordsBetween(rangeStart,s);if(between.length>=2){clearRangeStart();makeGroupCloze(between);toast('Grouped '+between.length+' words as one cloze');return;}}if(rangeStart===s){clearRangeStart();return;}if(s.classList.contains('cloze')||s.classList.contains('revealed')){if(!rangeStart){clearRangeStart();rangeStart=s;s.classList.add('range-start');toast('Range start — tap another word to group');return;}}if(s.classList.contains('revealed'))s.classList.replace('revealed','cloze');else if(s.classList.contains('cloze'))s.classList.replace('cloze','revealed');else{s.classList.add('cloze');recalcN();}},true);
+  s.addEventListener('dblclick',e=>{e.preventDefault();e.stopPropagation();if(remoteMode||s.closest('.group-cloze'))return;if(s.classList.contains('cloze')||s.classList.contains('revealed')){s.classList.remove('cloze','revealed');recalcN();toast('Removed');}});
+  s.addEventListener('mouseenter',()=>{if(!rangeStart||remoteMode)return;document.querySelectorAll('span.word.range-preview').forEach(el=>el.classList.remove('range-preview'));getWordsBetween(rangeStart,s).forEach(w=>{if(w!==rangeStart)w.classList.add('range-preview');});});
+  s.addEventListener('touchstart',()=>{if(!rangeStart||remoteMode)return;document.querySelectorAll('span.word.range-preview').forEach(el=>el.classList.remove('range-preview'));getWordsBetween(rangeStart,s).forEach(w=>{if(w!==rangeStart)w.classList.add('range-preview');});},{passive:true});
+});
+document.addEventListener('click',e=>{if(rangeStart&&!e.target.classList.contains('word'))clearRangeStart();});
+function restoreAll(){document.querySelectorAll('span.word.cloze,span.word.revealed,span.word.anki-wrong').forEach(s=>s.classList.remove('cloze','revealed','anki-wrong'));document.querySelectorAll('.group-cloze').forEach(g=>dissolveGroup(g));recalcN();}
+function revealAll(){document.querySelectorAll('span.word.cloze').forEach(s=>s.classList.replace('cloze','revealed'));document.querySelectorAll('.group-cloze.cloze').forEach(g=>g.classList.replace('cloze','revealed'));}
+function rehideAll(){document.querySelectorAll('span.word.revealed').forEach(s=>s.classList.replace('revealed','cloze'));document.querySelectorAll('.group-cloze.revealed').forEach(g=>g.classList.replace('revealed','cloze'));}
+function loadPersistentWrong(){try{const r=localStorage.getItem('neuro2_wrong_v1');if(r)persistentWrong=new Set(JSON.parse(r));}catch(e){}updateWrongBtn();}
+function savePersistentWrong(){try{localStorage.setItem('neuro2_wrong_v1',JSON.stringify([...persistentWrong]));}catch(e){}updateWrongBtn();}
+function updateWrongBtn(){const c=persistentWrong.size;document.getElementById('wrongBadge').textContent=c;document.getElementById('wrongBtn').style.display=c>0?'inline-block':'none';}
+function reviewWrong(){if(persistentWrong.size===0){toast('No wrong answers saved');return;}if(remoteMode){pausedSession={queue:[...ankiQueue],pos:ankiPos,wrongList:[...wrongList],correctCount,wrongCount,totalCards,ankiPhase,ankiActive,timeLeft:timerSecondsLeft,hadTimer:document.getElementById('hudTimerWrap').style.display!=='none'};clearInterval(timerInterval);timerInterval=null;remoteMode=false;document.getElementById('remoteBtn').textContent='▶ Remote Off';document.getElementById('remoteBtn').classList.remove('on');document.getElementById('sessionHUD').style.display='none';}else pausedSession=null;const groupMap={};document.querySelectorAll('.group-cloze').forEach(g=>{if(g.dataset.gid)groupMap['g'+g.dataset.gid]=g;});const pool=[];persistentWrong.forEach(key=>{if(typeof key==='string'&&key.startsWith('g')){const g=groupMap[key];if(g&&g.classList.contains('cloze'))pool.push(g);else if(!g)persistentWrong.delete(key);}else{const s=words[key];if(s&&s.classList.contains('cloze')&&!s.closest('.group-cloze'))pool.push(s);else if(s&&!s.classList.contains('cloze')&&!s.classList.contains('revealed')&&!s.classList.contains('anki-wrong'))persistentWrong.delete(key);}});savePersistentWrong();if(pool.length===0){toast('No wrong-marked words currently hidden');if(pausedSession)resumePausedSession();return;}document.querySelectorAll('span.word.anki-wrong,.group-cloze.anki-wrong').forEach(s=>s.classList.remove('anki-wrong'));pool.sort((a,b)=>a.compareDocumentPosition(b)&4?-1:1);ankiQueue=pool;totalCards=pool.length;ankiPos=0;wrongList=[];correctCount=0;wrongCount=0;ankiPhase='review';ankiActive=false;sessionCardsUsed=0;clearInterval(timerInterval);document.getElementById('hudTimerWrap').style.display='none';remoteMode=true;document.getElementById('remoteBtn').textContent='⏹ Remote ON';document.getElementById('remoteBtn').classList.add('on');document.getElementById('sessionHUD').style.display='block';document.getElementById('hudPhase').textContent=pausedSession?'🔁 REVIEW WRONG — session paused':'🔁 REVIEW WRONG';updateHUD();advanceToNext();toast(pausedSession?'Reviewing '+pool.length+' wrong — session paused':'Reviewing '+pool.length+' wrong answers');}
+function resumePausedSession(){if(!pausedSession)return;const ps=pausedSession;pausedSession=null;ankiQueue=ps.queue;ankiPos=ps.pos;wrongList=ps.wrongList;correctCount=ps.correctCount;wrongCount=ps.wrongCount;totalCards=ps.totalCards;ankiPhase=ps.ankiPhase;ankiActive=ps.ankiActive;sessionCardsUsed=0;clearInterval(timerInterval);if(ps.hadTimer&&ps.timeLeft>0){timerSecondsLeft=ps.timeLeft;document.getElementById('hudTimerWrap').style.display='flex';updateTimerDisplay();timerInterval=setInterval(()=>{timerSecondsLeft--;updateTimerDisplay();if(timerSecondsLeft<=0){clearInterval(timerInterval);endSession("Time's up!");}},1000);}else document.getElementById('hudTimerWrap').style.display='none';remoteMode=true;document.getElementById('remoteBtn').textContent='⏹ Remote ON';document.getElementById('remoteBtn').classList.add('on');document.getElementById('sessionHUD').style.display='block';updateHUD();if(ankiQueue[ankiPos])scrollToWord(ankiQueue[ankiPos]);toast('Back to your session ▶');}
+function openModal(){updatePreview();document.getElementById('sessionModal').classList.add('open');}
+function closeModal(){document.getElementById('sessionModal').classList.remove('open');}
+function toggleChip(el){document.querySelector('[data-sec="__ALL__"]').classList.remove('selected');el.classList.toggle('selected');updatePreview();}
+function toggleAll(el){const on=!el.classList.contains('selected');document.querySelectorAll('.section-chip:not([data-sec="__ALL__"])').forEach(c=>c.classList.remove('selected'));el.classList.toggle('selected',on);updatePreview();}
+function updatePreview(){const useSec=document.getElementById('useSections').checked,useTime=document.getElementById('useTime').checked,useCards=document.getElementById('useCards').checked;const timeLim=parseInt(document.getElementById('timeLimit').value)||20,cardLim=parseInt(document.getElementById('cardLimit').value)||25;const allSel=document.querySelector('[data-sec="__ALL__"]').classList.contains('selected');const selChips=Array.from(document.querySelectorAll('.section-chip.selected:not([data-sec="__ALL__"])'));const selSecs=selChips.map(c=>c.dataset.sec);let avail=buildClozePool(null);if(useSec&&!allSel&&selSecs.length>0)avail=buildClozePool(s=>selSecs.some(sec=>wordSection[+s.dataset.i].includes(sec)));let count=avail.length,effective=count;if(useCards)effective=Math.min(effective,cardLim);let parts=[];if(useSec)parts.push(allSel?'Whole document':selSecs.length>0?selChips.map(c=>c.textContent).join(', '):'No section selected');else parts.push('All sections');if(useTime)parts.push(timeLim+' min');if(useCards)parts.push(cardLim+' cards');const prev=document.getElementById('sessionPreview');if(count===0){prev.textContent='No hidden words match. Hide some words first.';prev.style.cssText='background:#fff1f2;border-color:#fca5a5;color:#b91c1c';}else{prev.style.cssText='background:#f0fdf4;border-color:#86efac;color:#166534';prev.textContent='▶ '+effective+' cards queued ('+count+' available) — '+parts.join(' · ');}document.getElementById('sectionGrid').style.opacity=useSec?'1':'0.4';document.getElementById('sectionGrid').style.pointerEvents=useSec?'auto':'none';}
+function startSession(){const useSec=document.getElementById('useSections').checked,useTime=document.getElementById('useTime').checked,useCards=document.getElementById('useCards').checked;const timeLim=parseInt(document.getElementById('timeLimit').value)||20,cardLim=parseInt(document.getElementById('cardLimit').value)||25;const allSel=document.querySelector('[data-sec="__ALL__"]').classList.contains('selected');const selSecs=Array.from(document.querySelectorAll('.section-chip.selected:not([data-sec="__ALL__"])')).map(c=>c.dataset.sec);let pool=buildClozePool(null);if(useSec&&!allSel&&selSecs.length>0)pool=buildClozePool(s=>selSecs.some(sec=>wordSection[+s.dataset.i].includes(sec)));if(pool.length===0){toast('No cards match — hide some words first');return;}if(useCards)pool=pool.slice(0,cardLim);document.querySelectorAll('span.word.revealed,span.word.anki-wrong').forEach(s=>{s.classList.remove('revealed','anki-wrong');s.classList.add('cloze');});ankiQueue=pool;totalCards=pool.length;ankiPos=0;wrongList=[];correctCount=0;wrongCount=0;ankiPhase='reveal';ankiActive=false;sessionCardsUsed=0;clearInterval(timerInterval);if(useTime){timerSecondsLeft=timeLim*60;document.getElementById('hudTimerWrap').style.display='flex';updateTimerDisplay();timerInterval=setInterval(()=>{timerSecondsLeft--;updateTimerDisplay();if(timerSecondsLeft<=0){clearInterval(timerInterval);endSession("Time's up!");}},1000);}else document.getElementById('hudTimerWrap').style.display='none';remoteMode=true;document.getElementById('remoteBtn').textContent='⏹ Remote ON';document.getElementById('remoteBtn').classList.add('on');document.getElementById('sessionHUD').style.display='block';closeModal();updateHUD();advanceToNext();}
+function stopSession(silent=false,keepRevealed=false){remoteMode=false;clearInterval(timerInterval);document.getElementById('remoteBtn').textContent='▶ Remote Off';document.getElementById('remoteBtn').classList.remove('on');document.getElementById('sessionHUD').style.display='none';if(!keepRevealed)document.querySelectorAll('span.word.revealed').forEach(s=>s.classList.replace('revealed','cloze'));document.querySelectorAll('span.word.anki-wrong').forEach(s=>s.classList.remove('anki-wrong'));if(!silent)toast('Session ended');}
+function toggleRemote(){if(remoteMode){pausedSession=null;stopSession();}else openModal();}
+function updateHUD(){document.getElementById('hudRemain').textContent=Math.max(0,ankiQueue.length-ankiPos);document.getElementById('hudGood').textContent=correctCount;document.getElementById('hudWrong').textContent=wrongCount;document.getElementById('hudPhase').textContent=ankiPhase==='review'?'🔁 REVIEW — '+(wrongList.length+(ankiQueue.length-ankiPos))+' to go':'▶ REVEAL';}
+function updateTimerDisplay(){const m=Math.floor(timerSecondsLeft/60).toString().padStart(2,'0'),s=(timerSecondsLeft%60).toString().padStart(2,'0');document.getElementById('hudTimer').textContent=m+':'+s;document.getElementById('hudTimerWrap').style.color=timerSecondsLeft<=60?'#f87171':'#facc15';}
+function scrollToWord(el){el.scrollIntoView({behavior:'smooth',block:'center'});}
+function flashBorder(el,color){el.style.outline='3px solid '+color;setTimeout(()=>{el.style.outline='';},500);}
+function advanceToNext(){while(ankiPos<ankiQueue.length){const s=ankiQueue[ankiPos];if(s.classList.contains('cloze')){scrollToWord(s);updateHUD();ankiActive=false;return;}ankiPos++;}endOfPass();}
+function endOfPass(){if(wrongList.length===0){const pct=totalCards>0?Math.round(correctCount/(correctCount+wrongCount||1)*100):100;endSession('✅ Done! '+correctCount+'✓ '+wrongCount+'✗ — '+pct+'%');return;}toast('Pass done — reviewing '+wrongList.length+' wrong');ankiPhase='review';ankiQueue=[...wrongList];wrongList=[];ankiPos=0;ankiActive=false;ankiQueue.forEach(s=>{s.classList.remove('revealed');s.classList.add('cloze');});updateHUD();advanceToNext();}
+function endSession(msg){clearInterval(timerInterval);saveState();toast(msg);document.getElementById('hudPhase').textContent=msg;document.getElementById('hudRemain').textContent='—';if(pausedSession)setTimeout(()=>{stopSession(true,true);resumePausedSession();},2000);else setTimeout(()=>stopSession(false,true),2000);}
+function ankiSpace(){if(!remoteMode)return;const s=ankiQueue[ankiPos];if(!s)return;if(!ankiActive){s.classList.replace('cloze','revealed');ankiActive=true;updateHUD();}else{flashBorder(s,'#22c55e');s.classList.remove('anki-wrong');if(s.dataset.gid)persistentWrong.delete('g'+s.dataset.gid);else persistentWrong.delete(+s.dataset.i);savePersistentWrong();correctCount++;sessionCardsUsed++;ankiPos++;ankiActive=false;updateHUD();setTimeout(advanceToNext,250);}}
+function ankiWrong(){if(!remoteMode)return;const s=ankiQueue[ankiPos];if(!s)return;if(!ankiActive){s.classList.replace('cloze','revealed');ankiActive=true;updateHUD();return;}flashBorder(s,'#ef4444');s.classList.replace('revealed','cloze');s.classList.add('anki-wrong');wrongList.push(s);if(s.dataset.gid)persistentWrong.add('g'+s.dataset.gid);else persistentWrong.add(+s.dataset.i);savePersistentWrong();wrongCount++;sessionCardsUsed++;ankiPos++;ankiActive=false;updateHUD();setTimeout(advanceToNext,250);}
+document.addEventListener('keydown',e=>{if(document.activeElement&&['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(e.key===' '||e.key==='0'||e.code==='Space'){e.preventDefault();ankiSpace();}if(e.key==='1'){e.preventDefault();ankiWrong();}if(e.key==='Escape'){closeModal();if(remoteMode)stopSession();selHint.style.display='none';clearRangeStart();}if((e.key==='c'||e.key==='C')&&!e.ctrlKey&&!e.metaKey&&!remoteMode){const sel=window.getSelection();if(!sel||sel.isCollapsed)return;const range=sel.getRangeAt(0),spansInSel=getWordSpansInRange(range);if(spansInSel.length<2)return;e.preventDefault();sel.removeAllRanges();selHint.style.display='none';makeGroupCloze(spansInSel);toast('Grouped '+spansInSel.length+' words as one cloze');}});
+function toast(msg){const d=document.createElement('div');d.className='toast';d.textContent=msg;document.body.appendChild(d);setTimeout(()=>{d.style.opacity='0';setTimeout(()=>d.remove(),400);},1600);}
+function saveState(){const state={c:[],r:[],inSession:remoteMode};document.querySelectorAll('span.word.cloze').forEach(s=>state.c.push(+s.dataset.i));document.querySelectorAll('span.word.revealed').forEach(s=>state.r.push(+s.dataset.i));if(!remoteMode){state.r.forEach(i=>state.c.push(i));state.r=[];}try{localStorage.setItem('neuro2_cloze_v1',JSON.stringify(state));toast(remoteMode?'Session saved — resume anytime':'Saved!');}catch(e){navigator.clipboard.writeText(JSON.stringify(state));toast('Copied to clipboard');}}
+function loadState(){let json=null;try{json=localStorage.getItem('neuro2_cloze_v1');}catch(e){}if(!json)json=prompt('Paste saved state JSON:');if(!json)return;try{const state=JSON.parse(json);restoreAll();const map={};words.forEach(s=>{map[s.dataset.i]=s;});(state.c||[]).forEach(i=>{if(map[i])map[i].classList.add('cloze');});if(state.inSession)(state.r||[]).forEach(i=>{if(map[i])map[i].classList.add('revealed');});else(state.r||[]).forEach(i=>{if(map[i])map[i].classList.add('cloze');});recalcN();toast(state.inSession&&(state.r||[]).length>0?'Loaded — session restored':'Loaded!');}catch(e){alert('Invalid state.');}}
+try{const saved=localStorage.getItem('neuro2_cloze_v1');if(saved){const state=JSON.parse(saved);const map={};words.forEach(s=>{map[s.dataset.i]=s;});(state.c||[]).forEach(i=>{if(map[i])map[i].classList.add('cloze');});if(state.inSession)(state.r||[]).forEach(i=>{if(map[i])map[i].classList.add('revealed');});else(state.r||[]).forEach(i=>{if(map[i])map[i].classList.add('cloze');});recalcN();}}catch(e){}
+loadPersistentWrong();
+function e_ankiGood(e){e.preventDefault();ankiSpace();}function e_ankiWrong(e){e.preventDefault();ankiWrong();}
+function updateTouchBtns(){const el=document.getElementById('touchBtns');if(el)el.classList.toggle('active',remoteMode);}
+new MutationObserver(()=>updateTouchBtns()).observe(document.getElementById('remoteBtn'),{characterData:true,childList:true,subtree:true,attributes:true});
+let lpTimer=null;const lpHint=document.getElementById('lpHint');
+function lpShow(msg){if(!lpHint)return;lpHint.textContent=msg;lpHint.style.display='block';clearTimeout(lpHint._hide);lpHint._hide=setTimeout(()=>{lpHint.style.display='none';},2200);}
+document.addEventListener('touchstart',e=>{if(remoteMode)return;lpTimer=setTimeout(()=>{lpTimer=null;const sel=window.getSelection();if(!sel||sel.isCollapsed||sel.toString().trim().length<2)return;const range=sel.getRangeAt(0);const docEl=document.getElementById('doc');if(!docEl||!docEl.contains(range.commonAncestorContainer))return;const spansInSel=getWordSpansInRange(range);if(spansInSel.length<2){lpShow('Select at least 2 words to group');return;}sel.removeAllRanges();if(selHint)selHint.style.display='none';makeGroupCloze(spansInSel);lpShow('Grouped '+spansInSel.length+' words ✓');},600);},{passive:true});
+document.addEventListener('touchend',()=>{clearTimeout(lpTimer);lpTimer=null;},{passive:true});
+document.addEventListener('touchmove',()=>{clearTimeout(lpTimer);lpTimer=null;},{passive:true});
+document.addEventListener('touchcancel',()=>{clearTimeout(lpTimer);lpTimer=null;},{passive:true});
+</script>
+</body>
+</html>
